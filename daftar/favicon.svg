@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Daftar">
+  <rect width="64" height="64" rx="15" fill="#C0502A"/>
+  <text x="32" y="34" text-anchor="middle" dominant-baseline="central"
+        font-family="'IBM Plex Sans Arabic','Reem Kufi','Segoe UI',sans-serif"
+        font-size="40" font-weight="600" fill="#F8F4EC">&#1583;</text>
+</svg>
