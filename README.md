@@ -39,6 +39,25 @@ there, update the matching `ar`/`en` strings here.
   data practices (no repo access here), so its product page intentionally omits a
   privacy link.
 
+## Editing content / regenerating
+
+The bilingual marketing pages (home, Studio, Contact, and the four product
+pages × AR + EN), the product favicons, and `sitemap.xml` are generated from
+`tools/build.py` — the single source for that copy (`PRODUCTS`, `PRINCIPLES`,
+`VOICE`, `T`). Edit the content there, then:
+
+```
+python3 tools/build.py
+```
+
+It writes plain `.html` and is **idempotent** — re-running with no content change
+produces no diff. This is a convenience, **not** a serve-time build: Pages serves
+the committed `.html` directly, so you can also hand-edit a page if you prefer.
+
+`build.py` deliberately does **not** touch `styles.css`, the privacy pages
+(hand-maintained legal documents), the studio `favicon.svg`, or
+`CNAME`/`robots.txt`/`.nojekyll`.
+
 ---
 
 ## Deploy (GitHub Pages)
