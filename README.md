@@ -1,7 +1,7 @@
 # kefafi.dev — Kefafi studio site
 
 Static site for **kefafi.dev**: the Kefafi studio homepage, plus a page and
-privacy policy per product. Sayla is the first product; more slot in beside it.
+privacy policy per product. Sayla and Daftar ship today; more slot in beside them.
 
 Plain HTML + one stylesheet + self-hosted brand fonts. No build step.
 
@@ -10,6 +10,8 @@ index.html                  studio home  ->  https://kefafi.dev/
 styles.css                  Kefafi tokens (clay-on-cream, light + dark)
 favicon.svg                 Kefafi mark (studio)
 fonts/                      self-hosted brand TTFs (no third-party font calls)
+robots.txt                  allow all + sitemap pointer
+sitemap.xml                 the five public URLs
 CNAME                       custom domain for GitHub Pages (kefafi.dev)
 .nojekyll                   serve files as-is (skip Jekyll)
 
@@ -18,29 +20,34 @@ sayla/
   favicon.svg               Sayla mark
   privacy/
     index.html              Sayla privacy policy ->  https://kefafi.dev/sayla/privacy/
+
+daftar/
+  index.html                Daftar product page  ->  https://kefafi.dev/daftar/
+  favicon.svg               Daftar mark
+  privacy/
+    index.html              Daftar privacy policy (AR + EN) -> https://kefafi.dev/daftar/privacy/
 ```
 
 Adding a product later = a new `<product>/` folder with its own `index.html` and
-`privacy/index.html`, plus a card in the studio `index.html`. Each product's
-privacy policy is namespaced, so they never collide.
+`privacy/index.html`, plus a card in the studio `index.html` and a `<url>` in
+`sitemap.xml`. Each product's privacy policy is namespaced, so they never collide.
 
-The canonical source of Sayla's policy text is
-`docs/legal/sayla-privacy-policy.md` in the main (private) app repo. Keep the two
-in sync when the wording changes.
+Each policy here is the published copy. **Daftar**'s policy mirrors
+`docs/play-store/privacy-policy.md` in the Daftar app repo (`knkan`) — keep the two
+in sync when the wording changes. **Sayla**'s policy is currently maintained here
+as its canonical copy (there is no separate doc in the app repo yet).
 
 ---
 
 ## Deploy (GitHub Pages)
 
-These files are meant to live in a **separate public repo** (e.g.
-`kfafi/kefafi-site`), because GitHub Pages on a free plan must be served from a
-public repo. The app code stays in the private repo.
+These files live in the public repo **`kfafi/kfafi.github.io`**, served by GitHub
+Pages (free-plan Pages must be served from a public repo). Each product's app
+code stays in its own private repo.
 
-1. Create a public repo `kefafi-site`.
-2. Copy the **contents of this `site/` folder** into the repo root and push to
-   `main`.
-3. Repo → **Settings → Pages** → Source: *Deploy from a branch* → `main` / `/root`.
-4. Under **Custom domain**, enter `kefafi.dev` and Save (the `CNAME` file already
+1. Push to `main` (this repo is already public).
+2. Repo → **Settings → Pages** → Source: *Deploy from a branch* → `main` / `/root`.
+3. Under **Custom domain**, enter `kefafi.dev` and Save (the `CNAME` file already
    sets this). Tick **Enforce HTTPS** once the cert is issued (can take a few
    minutes).
 

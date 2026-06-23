@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kefafi.dev/sitemap.xml
