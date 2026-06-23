@@ -60,7 +60,7 @@
   --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px;
   --radius-sm: 8px; --radius-md: 12px; --radius-lg: 18px; --radius-xl: 22px; --radius-full: 999px;
   --maxw: 1120px; --maxw-text: 820px;
-  --dur-base: 200ms; --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-base: 180ms; --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* ---- Dark theme: forced ([data-theme]) + system ------------- */

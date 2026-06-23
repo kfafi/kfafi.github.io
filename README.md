@@ -27,12 +27,17 @@ Products on the site: **Nasab** (نسب), **Daftar** (دفتر), **Sayla** (سي
 strings) is the bilingual content from the shared design canvas; if it changes
 there, update the matching `ar`/`en` strings here.
 
-**Privacy policies.** Daftar's mirrors `docs/play-store/privacy-policy.md` in the
-Daftar app repo (`knkan`); Sayla's is maintained here as its canonical copy. They
-are bilingual/standalone documents (not under `/en/`). **Nasab** and **Lumen** do
-**not** yet have privacy policies — author them from each app's real data
-practices before linking (Nasab is a Supabase/accounts app, so its policy differs
-materially from the offline apps; Lumen needs its own).
+**Privacy policies** are bilingual/standalone documents (not under `/en/`):
+
+- **Daftar** mirrors `docs/play-store/privacy-policy.md` in the Daftar app repo (`knkan`).
+- **Sayla** is maintained here as its canonical copy.
+- **Nasab** was drafted from the `family-tree` app's actual data model (Supabase
+  backend, accounts, per-person RLS visibility, revocable email shares, not a
+  social network) — unlike the offline apps it honestly states data is stored on
+  a server. **Review it before relying on it** as the app evolves.
+- **Lumen** has **no** privacy policy yet — it needs one authored from its real
+  data practices (no repo access here), so its product page intentionally omits a
+  privacy link.
 
 ---
 

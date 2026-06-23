@@ -85,13 +85,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://kefafi.dev/sayla/privacy/</loc>
+    <loc>https://kefafi.dev/nasab/privacy/</loc>
     <lastmod>2026-06-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://kefafi.dev/daftar/privacy/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://kefafi.dev/sayla/privacy/</loc>
     <lastmod>2026-06-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
