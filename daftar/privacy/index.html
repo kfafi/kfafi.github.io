@@ -18,24 +18,30 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="سياسة الخصوصية — دفتر · Privacy Policy — Daftar">
   <meta name="twitter:description" content="كل شيء يبقى على جهازك — لا بيانات، لا خوادم، لا إنترنت. Everything stays on your device.">
-  <link rel="stylesheet" href="../../styles.css">
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>(function(){try{var t=localStorage.getItem("kf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/daftar/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  <div class="wrap">
-    <header class="site">
-      <a class="mark" href="/daftar/">
-        <span class="mark__tile" aria-hidden="true">&#1583;</span>
-        <span class="mark__name">Daftar<span class="ar">&#1583;&#1601;&#1578;&#1585;</span></span>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="wordmark" href="/">
+        <span class="wordmark__latin">kefafi<span class="wordmark__dot">.</span></span>
+        <span class="wordmark__ar">كفافي</span>
       </a>
-      <nav>
-        <a href="/daftar/">Daftar</a>
-        <a href="/">Kefafi</a>
-        <a href="mailto:support@kefafi.dev">Support</a>
+      <nav class="site-nav">
+        <a href="/daftar/">دفتر</a>
+        <a href="/#products">المنتجات</a>
+        <a href="/about/">الاستوديو</a>
+        <a href="/contact/">تواصل</a>
       </nav>
-    </header>
-
-    <main>
+      <div class="header-tools">
+        <button class="tool-btn tool-btn--icon" id="theme-toggle" type="button" aria-label="السمة" title="السمة"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/></svg></button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="prose text-col">
       <p class="eyebrow">&#1587;&#1610;&#1575;&#1587;&#1577; &#1575;&#1604;&#1582;&#1589;&#1608;&#1589;&#1610;&#1577;</p>
       <h1>&#1587;&#1610;&#1575;&#1587;&#1577; &#1575;&#1604;&#1582;&#1589;&#1608;&#1589;&#1610;&#1577; &mdash; &#1583;&#1601;&#1578;&#1585;</h1>
       <p class="meta">&#1570;&#1582;&#1585; &#1578;&#1581;&#1583;&#1610;&#1579; 21 &#1610;&#1608;&#1606;&#1610;&#1608; 2026 &middot; dev.kefafi.daftar</p>
@@ -164,18 +170,40 @@
         <p>Questions about this policy or about Daftar&rsquo;s privacy:</p>
         <p><strong>Kefafi</strong> &mdash; <a href="mailto:support@kefafi.dev">support@kefafi.dev</a></p>
       </section>
-    </main>
-
-    <footer class="site">
-      <span>&copy; 2026 Kefafi</span>
-      <span>
-        <a href="/daftar/">Daftar</a>
-        &nbsp;&middot;&nbsp;
-        <a href="/">Kefafi</a>
-        &nbsp;&middot;&nbsp;
-        <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>
-      </span>
-    </footer>
-  </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="wordmark" href="/">
+            <span class="wordmark__latin">kefafi<span class="wordmark__dot">.</span></span>
+            <span class="wordmark__ar">كفافي</span>
+          </a>
+          <p class="site-footer__tagline">أدواتٌ صغيرة دقيقة وهادئة للحياة اليومية.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <div class="footer-col__head">المنتجات</div>
+            <div class="footer-col__links"><a href="/nasab/">Nasab</a><a href="/daftar/">Daftar</a><a href="/sayla/">Sayla</a><a href="/lumen/">Lumen</a></div>
+          </div>
+          <div>
+            <div class="footer-col__head">الاستوديو</div>
+            <div class="footer-col__links">
+              <a href="/about/">الاستوديو</a>
+              <a href="/contact/">تواصل</a>
+              <a href="/sayla/privacy/">Sayla سياسة الخصوصية</a>
+              <a href="/daftar/privacy/">Daftar سياسة الخصوصية</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; <span class="mono">2026</span> &middot; كفافي. أدواتٌ تفعل ما يكفي فقط.</span>
+        <span class="mono">يعكس kefafi_ui_kit</span>
+      </div>
+    </div>
+  </footer>
+  <script>(function(){var b=document.getElementById("theme-toggle");if(!b)return;b.addEventListener("click",function(){var c=document.documentElement.getAttribute("data-theme");var s=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;var d=c?c==="dark":s;var n=d?"light":"dark";document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("kf-theme",n);}catch(e){}});})();</script>
 </body>
 </html>

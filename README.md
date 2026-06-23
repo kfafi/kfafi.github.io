@@ -1,41 +1,38 @@
 # kefafi.dev — Kefafi studio site
 
-Static site for **kefafi.dev**: the Kefafi studio homepage, plus a page and
-privacy policy per product. Sayla and Daftar ship today; more slot in beside them.
+**Arabic-first**, bilingual studio site for **kefafi.dev**: a home, Studio (about)
+and Contact page, plus a page per product. Arabic (RTL) is the default at the root;
+English mirrors it under `/en/`. The two are linked with `hreflang` and a header
+language toggle, so each is a real, crawlable page (no JS needed to switch).
 
-Plain HTML + one stylesheet + self-hosted brand fonts. No build step.
+Plain HTML + one stylesheet + self-hosted brand fonts. Mirrors the shared
+`kefafi_ui_kit` tokens (one clay accent, warm paper, Hanken/Reem Kufi/Plex Mono,
+flat surfaces). The only JS is a tiny inline theme toggle — no third-party calls,
+no trackers. No serve-time build step.
 
 ```
-index.html                  studio home  ->  https://kefafi.dev/
-styles.css                  Kefafi tokens (clay-on-cream, light + dark)
-favicon.svg                 Kefafi mark (studio)
-fonts/                      self-hosted brand TTFs (no third-party font calls)
-robots.txt                  allow all + sitemap pointer
-sitemap.xml                 the five public URLs
-CNAME                       custom domain for GitHub Pages (kefafi.dev)
-.nojekyll                   serve files as-is (skip Jekyll)
-
-sayla/
-  index.html                Sayla product page  ->  https://kefafi.dev/sayla/
-  favicon.svg               Sayla mark
-  privacy/
-    index.html              Sayla privacy policy ->  https://kefafi.dev/sayla/privacy/
-
-daftar/
-  index.html                Daftar product page  ->  https://kefafi.dev/daftar/
-  favicon.svg               Daftar mark
-  privacy/
-    index.html              Daftar privacy policy (AR + EN) -> https://kefafi.dev/daftar/privacy/
+index.html / en/index.html        studio home      ->  / and /en/
+about/ , contact/  (+ en/…)       Studio + Contact pages
+<product>/ , en/<product>/        product page per language (ar root / en mirror)
+<product>/privacy/                privacy policy (namespaced, bilingual where it applies)
+styles.css                        Kefafi design tokens + components (light + dark)
+favicon.svg                       studio mark; <product>/favicon.svg per product
+fonts/                            self-hosted brand TTFs (no third-party font calls)
+robots.txt / sitemap.xml          crawl hints (sitemap lists ar + en URLs)
+CNAME / .nojekyll                 custom domain + serve-as-is
 ```
 
-Adding a product later = a new `<product>/` folder with its own `index.html` and
-`privacy/index.html`, plus a card in the studio `index.html` and a `<url>` in
-`sitemap.xml`. Each product's privacy policy is namespaced, so they never collide.
+Products on the site: **Nasab** (نسب), **Daftar** (دفتر), **Sayla** (سيلة),
+**Lumen** (لومن). The page copy (taglines, intros, features, principles, UI
+strings) is the bilingual content from the shared design canvas; if it changes
+there, update the matching `ar`/`en` strings here.
 
-Each policy here is the published copy. **Daftar**'s policy mirrors
-`docs/play-store/privacy-policy.md` in the Daftar app repo (`knkan`) — keep the two
-in sync when the wording changes. **Sayla**'s policy is currently maintained here
-as its canonical copy (there is no separate doc in the app repo yet).
+**Privacy policies.** Daftar's mirrors `docs/play-store/privacy-policy.md` in the
+Daftar app repo (`knkan`); Sayla's is maintained here as its canonical copy. They
+are bilingual/standalone documents (not under `/en/`). **Nasab** and **Lumen** do
+**not** yet have privacy policies — author them from each app's real data
+practices before linking (Nasab is a Supabase/accounts app, so its policy differs
+materially from the offline apps; Lumen needs its own).
 
 ---
 
@@ -83,7 +80,8 @@ In [Google Cloud Console](https://console.cloud.google.com) → project
 `292546653220` → **APIs & Services → OAuth consent screen**:
 
 1. **Authorized domains** → add `kefafi.dev`.
-2. **App home page** → `https://kefafi.dev/sayla/`
+2. **App home page** → `https://kefafi.dev/en/sayla/` (English Sayla page; the
+   Arabic page is at `https://kefafi.dev/sayla/`).
 3. **Privacy policy link** → `https://kefafi.dev/sayla/privacy/`
 4. (Skip the logo for now — uploading one triggers a separate brand-verification
    review. Add it later.)

@@ -1,112 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kefafi — tools that do just enough</title>
-  <meta name="description" content="Kefafi is a studio making small, precise utilities. Each one solves a single real problem, works on day one, and stays out of your way.">
+  <title>Kefafi — أدواتٌ تفعل ما يكفي فقط.</title>
+  <meta name="description" content="كفافي استوديو مستقل يصنع أدوات صغيرة دقيقة وهادئة للحياة اليومية. كلٌّ منها يفعل شيئاً واحداً جيداً، ثم يبتعد عن طريقك.">
   <link rel="canonical" href="https://kefafi.dev/">
+  <link rel="alternate" hreflang="ar" href="/">
+  <link rel="alternate" hreflang="en" href="/en/">
+  <link rel="alternate" hreflang="x-default" href="/">
   <meta name="theme-color" content="#F5F1E8" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#161310" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Kefafi">
-  <meta property="og:title" content="Kefafi — tools that do just enough">
-  <meta property="og:description" content="A studio making small, precise utilities. Each one solves a single real problem, works on day one, and stays out of your way.">
+  <meta property="og:title" content="Kefafi — أدواتٌ تفعل ما يكفي فقط.">
+  <meta property="og:description" content="كفافي استوديو مستقل يصنع أدوات صغيرة دقيقة وهادئة للحياة اليومية. كلٌّ منها يفعل شيئاً واحداً جيداً، ثم يبتعد عن طريقك.">
   <meta property="og:url" content="https://kefafi.dev/">
-  <meta property="og:locale" content="en_US">
+  <meta property="og:locale" content="ar_SA">
+  <meta property="og:locale:alternate" content="en_US">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Kefafi — tools that do just enough">
-  <meta name="twitter:description" content="A studio making small, precise utilities — no ads, no tracking, no lock-in.">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="twitter:title" content="Kefafi — أدواتٌ تفعل ما يكفي فقط.">
+  <meta name="twitter:description" content="كفافي استوديو مستقل يصنع أدوات صغيرة دقيقة وهادئة للحياة اليومية. كلٌّ منها يفعل شيئاً واحداً جيداً، ثم يبتعد عن طريقك.">
+  <script>(function(){try{var t=localStorage.getItem("kf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
-<body>
-  <div class="wrap">
-    <header class="site">
-      <a class="mark" href="/">
-        <span class="mark__tile" aria-hidden="true">k</span>
-        <span class="mark__name">Kefafi<span class="ar">&#1575;&#1604;&#1603;&#1601;&#1575;&#1601;&#1610;</span></span>
+<body>  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="wordmark" href="/">
+        <span class="wordmark__latin">kefafi<span class="wordmark__dot">.</span></span>
+        <span class="wordmark__ar">كفافي</span>
       </a>
-      <nav>
-        <a href="mailto:support@kefafi.dev">Contact</a>
-      </nav>
-    </header>
+      <nav class="site-nav"><a href="/" aria-current="page">الرئيسية</a><a href="/#products">المنتجات</a><a href="/about/">الاستوديو</a><a href="/contact/">تواصل</a></nav>
+      <div class="header-tools">
+        <a class="tool-btn" href="/en/" hreflang="en" title="EN">EN</a>
+        <button class="tool-btn tool-btn--icon" id="theme-toggle" type="button" aria-label="السمة" title="السمة"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/></svg></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero wrap">
+      <div class="hero__grid">
+        <div>
+          <p class="eyebrow">استوديو برمجيات مستقل</p>
+          <h1 class="display">أدواتٌ تفعل ما يكفي فقط.</h1>
+          <p class="hero__sub">كفافي استوديو مستقل يصنع أدوات صغيرة دقيقة وهادئة للحياة اليومية. كلٌّ منها يفعل شيئاً واحداً جيداً، ثم يبتعد عن طريقك.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary btn--lg" href="/#products">شاهد المنتجات</a>
+            <a class="btn btn--outline btn--lg" href="/about/">عن الاستوديو</a>
+          </div>
+        </div>
+        <div class="tile-grid">
+        <a class="tile" href="/nasab/">
+          <span class="mono-tile mono-tile--ink mono-tile--lg">ن</span>
+          <span class="tile__name">Nasab</span>
+        </a>        <a class="tile" href="/daftar/">
+          <span class="mono-tile mono-tile--clay mono-tile--lg">د</span>
+          <span class="tile__name">Daftar</span>
+        </a>        <a class="tile" href="/sayla/">
+          <span class="mono-tile mono-tile--clay mono-tile--lg">س</span>
+          <span class="tile__name">Sayla</span>
+        </a>        <a class="tile" href="/lumen/">
+          <span class="mono-tile mono-tile--ink mono-tile--lg">ل</span>
+          <span class="tile__name">Lumen</span>
+        </a>
+        </div>
+      </div>
+    </section>
 
-    <main>
-      <section class="hero">
-        <span class="claim">Tools that do just enough</span>
-        <h1>Small, precise utilities.</h1>
-        <p class="lede">
-          Kefafi is a studio making small tools that each do one thing well
-          &mdash; just enough, and no more. Each one solves a single real problem,
-          works on day one, and stays out of your way. No ads, no tracking, no
-          lock-in.
-        </p>
-      </section>
+    <section class="band" id="products">
+      <div class="wrap section">
+        <div class="section-head">
+          <p class="eyebrow">المنتجات</p>
+          <h2>أربع أدوات.</h2>
+          <p>مبنيّة على نفس المبادئ ونفس الطقم المشترك.</p>
+        </div>
+        <div class="cards">
+        <a class="card" href="/nasab/">
+          <div class="card__row">
+            <span class="mono-tile mono-tile--ink mono-tile--md">ن</span>
+            <div class="card__body">
+              <div class="card__title"><span class="card__name">Nasab</span><span class="card__ar">نسب</span></div>
+              <p class="card__desc">تملك شجرة عائلتك؛ تشاركها وتسحبها متى شئت. ليست شبكة اجتماعية.</p>
+              <span class="card__cta">اعرف أكثر<span class="mono">←</span></span>
+            </div>
+          </div>
+        </a>        <a class="card" href="/daftar/">
+          <div class="card__row">
+            <span class="mono-tile mono-tile--clay mono-tile--md">د</span>
+            <div class="card__body">
+              <div class="card__title"><span class="card__name">Daftar</span><span class="card__ar">دفتر</span></div>
+              <p class="card__desc">تتبّع نقاط الكنكان والبلوت. بديل الدفتر الورقي. دون اتصال، بلا حسابات.</p>
+              <span class="card__cta">اعرف أكثر<span class="mono">←</span></span>
+            </div>
+          </div>
+        </a>        <a class="card" href="/sayla/">
+          <div class="card__row">
+            <span class="mono-tile mono-tile--clay mono-tile--md">س</span>
+            <div class="card__body">
+              <div class="card__title"><span class="card__name">Sayla</span><span class="card__ar">سيلة</span></div>
+              <p class="card__desc">مرِّر الملاحظات والروابط والملفات بين أجهزتك عبر Google Drive الخاص بك. بلا خادم.</p>
+              <span class="card__cta">اعرف أكثر<span class="mono">←</span></span>
+            </div>
+          </div>
+        </a>        <a class="card" href="/lumen/">
+          <div class="card__row">
+            <span class="mono-tile mono-tile--ink mono-tile--md">ل</span>
+            <div class="card__body">
+              <div class="card__title"><span class="card__name">Lumen</span><span class="card__ar">لومن</span></div>
+              <p class="card__desc">تطبيق لتلفاز أندرويد، مع محدِّث داخل التطبيق.</p>
+              <span class="card__cta">اعرف أكثر<span class="mono">←</span></span>
+            </div>
+          </div>
+        </a>
+        </div>
+      </div>
+    </section>
 
-      <h2>Products</h2>
-      <ul class="products">
-        <li>
-          <a class="product" href="/sayla/">
-            <span class="product__tile" aria-hidden="true">&#8599;</span>
-            <span class="product__body">
-              <span class="product__name">
-                Sayla <span class="ar">&#1587;&#1610;&#1604;&#1577;</span>
-                <span class="product__tag">In testing</span>
-              </span>
-              <span class="product__desc">
-                Send files, links, and notes between your own devices &mdash;
-                through your own Google Drive. No backend, nothing for us to read.
-              </span>
-            </span>
+    <section class="wrap section">
+      <div class="section-head">
+        <p class="eyebrow">كيف نبني</p>
+        <h2>مبادئ قليلة، نلتزم بها.</h2>
+      </div>
+      <div class="grid-rule">
+        <div class="grid-rule__cell">
+          <div class="grid-rule__num">01</div>
+          <h3>عربيٌّ أولاً</h3>
+          <p>عربيٌّ أولاً وRTL افتراضاً. الإنجليزية تعكسه.</p>
+        </div>        <div class="grid-rule__cell">
+          <div class="grid-rule__num">02</div>
+          <h3>بياناتك مِلكك</h3>
+          <p>دون اتصال حيثما أمكن. بلا حسابات لا لزوم لها، بلا قفل سحابي.</p>
+        </div>        <div class="grid-rule__cell">
+          <div class="grid-rule__num">03</div>
+          <h3>هدوءٌ بالتصميم</h3>
+          <p>ورقٌ دافئ، لونٌ واحد، بلا ضجيج.</p>
+        </div>        <div class="grid-rule__cell">
+          <div class="grid-rule__num">04</div>
+          <h3>ما يكفي فقط</h3>
+          <p>أدواتٌ تفعل ما يكفي — ولا شيء أكثر.</p>
+        </div>        <div class="grid-rule__cell">
+          <div class="grid-rule__num">05</div>
+          <h3>كلامٌ واضح</h3>
+          <p>نذكر النتيجة، لا نصرخ بها.</p>
+        </div>        <div class="grid-rule__cell">
+          <div class="grid-rule__num">06</div>
+          <h3>طقمٌ واحد</h3>
+          <p>كل أداة مبنية على نفس الطقم المشترك.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band-surface">
+      <div class="wrap section closing">
+        <div>
+          <p class="eyebrow">تواصل</p>
+          <h2>فكرةٌ، أو سؤال؟</h2>
+          <p>نحب أن نسمع منك.</p>
+        </div>
+        <a class="btn btn--primary btn--lg" href="/contact/">تواصل</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="wordmark" href="/">
+            <span class="wordmark__latin">kefafi<span class="wordmark__dot">.</span></span>
+            <span class="wordmark__ar">كفافي</span>
           </a>
-        </li>
-        <li>
-          <a class="product" href="/daftar/">
-            <span class="product__tile" aria-hidden="true">&#1583;</span>
-            <span class="product__body">
-              <span class="product__name">
-                Daftar <span class="ar">&#1583;&#1601;&#1578;&#1585;</span>
-                <span class="product__tag">In testing</span>
-              </span>
-              <span class="product__desc">
-                A score keeper for the card games Baloot &amp; Kankan &mdash;
-                it replaces the paper sheet. Offline, no accounts, nothing
-                leaves your device.
-              </span>
-            </span>
-          </a>
-        </li>
-        <li>
-          <span class="product product--soon">
-            <span class="product__tile product__tile--soon" aria-hidden="true">&#43;</span>
-            <span class="product__body">
-              <span class="product__name">
-                More coming
-                <span class="product__tag">Soon</span>
-              </span>
-              <span class="product__desc">
-                More small utilities are on the way &mdash; same idea, each doing
-                just enough.
-              </span>
-            </span>
-          </span>
-        </li>
-      </ul>
-
-      <p class="meta">Kefafi &middot; &#1575;&#1604;&#1603;&#1601;&#1575;&#1601;&#1610; &middot; kfafi</p>
-    </main>
-
-    <footer class="site">
-      <span>&copy; 2026 Kefafi</span>
-      <span>
-        <a href="/sayla/privacy/">Sayla Privacy</a>
-        &nbsp;&middot;&nbsp;
-        <a href="/daftar/privacy/">Daftar Privacy</a>
-        &nbsp;&middot;&nbsp;
-        <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>
-      </span>
-    </footer>
-  </div>
+          <p class="site-footer__tagline">أدواتٌ صغيرة دقيقة وهادئة للحياة اليومية.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <div class="footer-col__head">المنتجات</div>
+            <div class="footer-col__links"><a href="/nasab/">Nasab</a><a href="/daftar/">Daftar</a><a href="/sayla/">Sayla</a><a href="/lumen/">Lumen</a></div>
+          </div>
+          <div>
+            <div class="footer-col__head">الاستوديو</div>
+            <div class="footer-col__links">
+              <a href="/about/">الاستوديو</a>
+              <a href="/contact/">تواصل</a>
+              <a href="/sayla/privacy/">Sayla سياسة الخصوصية</a>
+              <a href="/daftar/privacy/">Daftar سياسة الخصوصية</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; <span class="mono">2026</span> &middot; كفافي. أدواتٌ تفعل ما يكفي فقط.</span>
+        <span class="mono">يعكس kefafi_ui_kit</span>
+      </div>
+    </div>
+  </footer>
+  <script>(function(){var b=document.getElementById("theme-toggle");if(!b)return;b.addEventListener("click",function(){var c=document.documentElement.getAttribute("data-theme");var s=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;var d=c?c==="dark":s;var n=d?"light":"dark";document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("kf-theme",n);}catch(e){}});})();</script>
 </body>
 </html>
