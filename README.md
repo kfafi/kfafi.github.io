@@ -1,46 +1,74 @@
 # kefafi.dev — Kefafi studio site
 
-Static site for **kefafi.dev**: the Kefafi studio homepage, plus a page and
-privacy policy per product. Sayla is the first product; more slot in beside it.
+**Arabic-first**, bilingual studio site for **kefafi.dev**: a home, Studio (about)
+and Contact page, plus a page per product. Arabic (RTL) is the default at the root;
+English mirrors it under `/en/`. The two are linked with `hreflang` and a header
+language toggle, so each is a real, crawlable page (no JS needed to switch).
 
-Plain HTML + one stylesheet + self-hosted brand fonts. No build step.
+Plain HTML + one stylesheet + self-hosted brand fonts. Mirrors the shared
+`kefafi_ui_kit` tokens (one clay accent, warm paper, Hanken/Reem Kufi/Plex Mono,
+flat surfaces). The only JS is a tiny inline theme toggle — no third-party calls,
+no trackers. No serve-time build step.
 
 ```
-index.html                  studio home  ->  https://kefafi.dev/
-styles.css                  Kefafi tokens (clay-on-cream, light + dark)
-favicon.svg                 Kefafi mark (studio)
-fonts/                      self-hosted brand TTFs (no third-party font calls)
-CNAME                       custom domain for GitHub Pages (kefafi.dev)
-.nojekyll                   serve files as-is (skip Jekyll)
-
-sayla/
-  index.html                Sayla product page  ->  https://kefafi.dev/sayla/
-  favicon.svg               Sayla mark
-  privacy/
-    index.html              Sayla privacy policy ->  https://kefafi.dev/sayla/privacy/
+index.html / en/index.html        studio home      ->  / and /en/
+about/ , contact/  (+ en/…)       Studio + Contact pages
+<product>/ , en/<product>/        product page per language (ar root / en mirror)
+<product>/privacy/                privacy policy (namespaced, bilingual where it applies)
+styles.css                        Kefafi design tokens + components (light + dark)
+favicon.svg                       studio mark; <product>/favicon.svg per product
+fonts/                            self-hosted brand TTFs (no third-party font calls)
+robots.txt / sitemap.xml          crawl hints (sitemap lists ar + en URLs)
+CNAME / .nojekyll                 custom domain + serve-as-is
 ```
 
-Adding a product later = a new `<product>/` folder with its own `index.html` and
-`privacy/index.html`, plus a card in the studio `index.html`. Each product's
-privacy policy is namespaced, so they never collide.
+Products on the site: **Nasab** (نسب), **Daftar** (دفتر), **Sayla** (سيلة),
+**Lumen** (لومن). The page copy (taglines, intros, features, principles, UI
+strings) is the bilingual content from the shared design canvas; if it changes
+there, update the matching `ar`/`en` strings here.
 
-The canonical source of Sayla's policy text is
-`docs/legal/sayla-privacy-policy.md` in the main (private) app repo. Keep the two
-in sync when the wording changes.
+**Privacy policies** are bilingual/standalone documents (not under `/en/`):
+
+- **Daftar** mirrors `docs/play-store/privacy-policy.md` in the Daftar app repo (`knkan`).
+- **Sayla** is maintained here as its canonical copy.
+- **Nasab** was drafted from the `family-tree` app's actual data model (Supabase
+  backend, accounts, per-person RLS visibility, revocable email shares, not a
+  social network) — unlike the offline apps it honestly states data is stored on
+  a server. **Review it before relying on it** as the app evolves.
+- **Lumen** has **no** privacy policy yet — it needs one authored from its real
+  data practices (no repo access here), so its product page intentionally omits a
+  privacy link.
+
+## Editing content / regenerating
+
+The bilingual marketing pages (home, Studio, Contact, and the four product
+pages × AR + EN), the product favicons, and `sitemap.xml` are generated from
+`tools/build.py` — the single source for that copy (`PRODUCTS`, `PRINCIPLES`,
+`VOICE`, `T`). Edit the content there, then:
+
+```
+python3 tools/build.py
+```
+
+It writes plain `.html` and is **idempotent** — re-running with no content change
+produces no diff. This is a convenience, **not** a serve-time build: Pages serves
+the committed `.html` directly, so you can also hand-edit a page if you prefer.
+
+`build.py` deliberately does **not** touch `styles.css`, the privacy pages
+(hand-maintained legal documents), the studio `favicon.svg`, or
+`CNAME`/`robots.txt`/`.nojekyll`.
 
 ---
 
 ## Deploy (GitHub Pages)
 
-These files are meant to live in a **separate public repo** (e.g.
-`kfafi/kefafi-site`), because GitHub Pages on a free plan must be served from a
-public repo. The app code stays in the private repo.
+These files live in the public repo **`kfafi/kfafi.github.io`**, served by GitHub
+Pages (free-plan Pages must be served from a public repo). Each product's app
+code stays in its own private repo.
 
-1. Create a public repo `kefafi-site`.
-2. Copy the **contents of this `site/` folder** into the repo root and push to
-   `main`.
-3. Repo → **Settings → Pages** → Source: *Deploy from a branch* → `main` / `/root`.
-4. Under **Custom domain**, enter `kefafi.dev` and Save (the `CNAME` file already
+1. Push to `main` (this repo is already public).
+2. Repo → **Settings → Pages** → Source: *Deploy from a branch* → `main` / `/root`.
+3. Under **Custom domain**, enter `kefafi.dev` and Save (the `CNAME` file already
    sets this). Tick **Enforce HTTPS** once the cert is issued (can take a few
    minutes).
 
@@ -76,7 +104,8 @@ In [Google Cloud Console](https://console.cloud.google.com) → project
 `292546653220` → **APIs & Services → OAuth consent screen**:
 
 1. **Authorized domains** → add `kefafi.dev`.
-2. **App home page** → `https://kefafi.dev/sayla/`
+2. **App home page** → `https://kefafi.dev/en/sayla/` (English Sayla page; the
+   Arabic page is at `https://kefafi.dev/sayla/`).
 3. **Privacy policy link** → `https://kefafi.dev/sayla/privacy/`
 4. (Skip the logo for now — uploading one triggers a separate brand-verification
    review. Add it later.)
