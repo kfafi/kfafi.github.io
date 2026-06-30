@@ -106,7 +106,7 @@ T = {
   "viewLabel": "اعرف أكثر",
   "principlesEyebrow": "كيف نبني", "principlesTitle": "مبادئ قليلة، نلتزم بها.",
   "closingEyebrow": "تواصل", "closingTitle": "فكرةٌ، أو سؤال؟", "closingSub": "نحب أن نسمع منك.",
-  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية",
+  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم",
   "aboutEyebrow": "الاستوديو", "aboutTitle": "ما يكفي فقط.",
   "aboutP1": "كفافي استوديو برمجيات مستقل صغير. نصنع أدوات هادئة للحياة اليومية — أداةٌ تفعل شيئاً واحداً جيداً، ثم تبتعد عن طريقك.",
   "aboutP2": "نبني بلغةٍ عربية أولاً، ودون اتصال حيثما أمكن. بياناتك تبقى معك. واجهاتنا دافئة، بلونٍ واحد، بلا ضجيج.",
@@ -127,7 +127,7 @@ T = {
   "viewLabel": "Learn more",
   "principlesEyebrow": "How we build", "principlesTitle": "A few principles, kept.",
   "closingEyebrow": "Get in touch", "closingTitle": "An idea, or a question?", "closingSub": "We'd love to hear from you.",
-  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy",
+  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support",
   "aboutEyebrow": "The studio", "aboutTitle": "Just enough.",
   "aboutP1": "Kefafi is a small, independent software studio. We make calm tools for everyday personal life — software that does one thing well, then gets out of your way.",
   "aboutP2": "We build Arabic-first and offline-where-we-can. Your data stays yours. Our interfaces are warm, single-accent, and quiet.",
@@ -263,7 +263,9 @@ def footer(lang):
             <div class="footer-col__links">
               <a href="{b}/about/">{e(t['navAbout'])}</a>
               <a href="{b}/contact/">{e(t['navContact'])}</a>
-              <a href="/nasab/privacy/">Nasab {e(t['privacyLabel'])}</a>
+              <a href="{b}/nasab/privacy/">Nasab {e(t['privacyLabel'])}</a>
+              <a href="{b}/nasab/terms/">Nasab {e(t['termsLabel'])}</a>
+              <a href="{b}/nasab/support/">Nasab {e(t['supportLabel'])}</a>
               <a href="/daftar/privacy/">Daftar {e(t['privacyLabel'])}</a>
               <a href="/sayla/privacy/">Sayla {e(t['privacyLabel'])}</a>
             </div>
@@ -383,7 +385,15 @@ def page_product(lang, p):
             <span>{e(o['name'])}</span>
           </a>""" for o in others)
     privacy_link = ""
-    if p.get("privacy"):
+    legal_row = ""
+    if pid == "nasab":
+        legal_row = (f'\n        <p class="legal-links">'
+                     f'<a href="{b}/nasab/privacy/">{e(t["privacyLabel"])}</a>'
+                     f'<span class="sep">&middot;</span>'
+                     f'<a href="{b}/nasab/terms/">{e(t["termsLabel"])}</a>'
+                     f'<span class="sep">&middot;</span>'
+                     f'<a href="{b}/nasab/support/">{e(t["supportLabel"])}</a></p>')
+    elif p.get("privacy"):
         privacy_link = f'\n            <a class="btn btn--ghost" href="/{pid}/privacy/">{e(t["privacyLabel"])}</a>'
     title = f"{p['name']} — {p['tagline'][lang]}"
     desc = p["line"][lang]
@@ -400,7 +410,7 @@ def page_product(lang, p):
         <div class="btn-row">
           <a class="btn btn--primary" href="{GITHUB}" target="_blank" rel="noopener">{e(t['ctaGithub'])}</a>
           <a class="btn btn--ghost" href="{b}/contact/">{e(t['navContact'])}</a>{privacy_link}
-        </div>
+        </div>{legal_row}
       </div>
     </section>
 
@@ -515,6 +525,466 @@ def page_contact(lang):
   </main>
 """ + footer(lang)
 
+# ---------------------------------------------------------------- nasab legal/support
+# %%B%% is replaced with the language base ("" for AR, "/en" for EN) at render time.
+NASAB_PAGES = {
+ "privacy": {
+  "eyebrow": {"ar": "سياسة الخصوصية", "en": "Privacy Policy"},
+  "h1": {"ar": "سياسة الخصوصية — نسب", "en": "Privacy Policy — Nasab"},
+  "title": {"ar": "سياسة الخصوصية — نسب", "en": "Privacy Policy — Nasab"},
+  "desc": {"ar": "سياسة خصوصية تطبيق نسب: خاص افتراضياً، الأحياء خاصون، لا إعلانات ولا تتبّع، والبيانات لا تُباع.",
+           "en": "Nasab's privacy policy: private by default, living people private, no ads or tracking, data never sold."},
+  "meta": {"ar": "آخر تحديث 23 يونيو 2026", "en": "Last updated 23 June 2026"},
+  "body": {"ar": """
+      <p>
+        نسب من صناعة <strong>الكفافي</strong> («نحن»). نسب تطبيق <strong>خاص</strong>
+        لشجرة العائلة موجّه للعائلات العربية، و<strong>ليس شبكة اجتماعية</strong>: لا
+        موجز عام، ولا اكتشاف، ولا دليل مشترك. توضّح هذه السياسة ما الذي نجمعه وكيف
+        نستخدمه ونحميه.
+      </p>
+      <p>
+        حتى تصل إلى شجرتك من أجهزتك وتشاركها مع من تختار، يحفظ نسب بياناتك على خادم
+        آمن لدى مزوّد الخدمة، <strong>تحت تحكّمك</strong>. المبدأ الأساسي: أنت تملك
+        شجرتك، وتتحكّم بمن يراها، وتسحب الوصول متى شئت.
+      </p>
+
+      <h2>ما الذي نجمعه</h2>
+      <ul>
+        <li><strong>حسابك:</strong> بريدك الإلكتروني وكلمة المرور (تُخزَّن مُجزّأة hashed، ولا نراها)، واسم عرض ولغة مفضّلة اختياريان.</li>
+        <li><strong>ملاحظة حول البريد:</strong> لا يتحقّق التطبيق من ملكيتك للبريد الإلكتروني. <strong>استخدم بريداً تملكه</strong>، فهو وسيلتك لاستعادة كلمة المرور ولاستقبال الدعوات.</li>
+        <li><strong>محتوى الشجرة الذي تُدخله:</strong> أسماء الأقارب (بالعربية واللاتينية)، والجنس، وصلات القرابة والزواج، وتواريخ الميلاد والوفاة (هجري وميلادي)، والأماكن، والنبذ التعريفية، و<strong>روابط الصور التي تزوّدنا بها</strong> (نخزّن الرابط الذي تكتبه، لا ملفات صور مرفوعة)، والانتماءات القبلية، وإعدادات الخصوصية لكل سجل.</li>
+        <li><strong>بيانات المشاركة:</strong> عناوين البريد التي تدعوها والأدوار التي تمنحها.</li>
+        <li><strong>سجلات تقنية:</strong> سجلات خادم اعتيادية (عنوان IP وطوابع زمنية) يحتفظ بها مزوّد البنية التحتية.</li>
+      </ul>
+
+      <h2>كيف نستخدم بياناتك</h2>
+      <p>
+        نستخدمها لتشغيل التطبيق فقط: للتحقق من دخولك، وحفظ شجرتك وعرضها، وفرض إعدادات
+        الخصوصية والمشاركة التي تختارها، والحفاظ على أمان الخدمة. لا نستخدمها لأي غرض آخر.
+      </p>
+
+      <h2>ما لا نفعله</h2>
+      <ul>
+        <li><strong>لا إعلانات.</strong></li>
+        <li><strong>لا تتبّع ولا تحليلات من طرف ثالث.</strong></li>
+        <li><strong>لا نبيع بياناتك أبداً.</strong></li>
+      </ul>
+
+      <h2>أين تُخزَّن بياناتك وأمنها</h2>
+      <p>
+        تُخزَّن بياناتك في قاعدة بيانات <strong>Supabase</strong> (Postgres) مع أمان على
+        مستوى الصف (Row-Level Security)، وهي <strong>خاصة افتراضياً</strong>.
+        <strong>الأشخاص الأحياء خاصون افتراضياً.</strong> تنتقل البيانات عبر اتصالات
+        مشفّرة (HTTPS)، وكلمات المرور تُخزَّن مُجزّأة.
+      </p>
+
+      <h2>المشاركة والخصوصية</h2>
+      <p>
+        المشاركة بيدك وعلى مستوى كل شجرة: تدعو شخصاً برابط وتمنحه دور
+        <strong>مُطّلِع</strong> (قراءة) أو <strong>محرِّر</strong>، ويمكنك سحب الوصول في
+        أي وقت. ولكل سجلٍّ مستوى ظهوره الخاص، والأحياء خاصون افتراضياً.
+      </p>
+
+      <h2>بيانات عن أشخاص آخرين</h2>
+      <p>
+        بطبيعته، يسجّل نسب أفراد العائلة، وقد يكون بينهم قُصّر. أنت مسؤول عمّا تُدخله،
+        وعليك أن تملك الحق أو الإذن في تسجيل بيانات غيرك. الإعدادات الافتراضية تحمي
+        الأحياء، ويمكن لأي شخص مراسلتنا لمراجعة بياناته أو إزالتها.
+      </p>
+
+      <h2>حقوقك</h2>
+      <ul>
+        <li><strong>الاطلاع والتصحيح:</strong> تعرض بياناتك وتعدّلها داخل التطبيق.</li>
+        <li><strong>التصدير:</strong> تصدّر شجرتك بصيغة <strong>GEDCOM</strong>.</li>
+        <li><strong>الحذف:</strong> تحذف حسابك وكل بياناتك — انظر <a href="%%B%%/nasab/support/#delete">حذف الحساب</a>.</li>
+      </ul>
+
+      <h2>حذف الحساب والبيانات</h2>
+      <p>
+        يمكنك حذف حسابك من داخل التطبيق في أي وقت: القائمة ← «حذف الحساب» ← تأكيد. يحذف
+        ذلك حسابك، وكل شجرة تملكها وما فيها من أشخاص وزيجات، وكل صلاحيات المشاركة من
+        حسابك وإليه — <strong>فوراً وبلا رجعة</strong>. تبقى القبائل التي أنشأتها مرجعاً
+        مشتركاً لغيرك. إن تعذّر عليك الدخول، راسلنا على
+        <a href="mailto:support@kefafi.dev">support@kefafi.dev</a> لإتمام الحذف.
+        التفاصيل في <a href="%%B%%/nasab/support/#delete">صفحة الدعم</a>.
+      </p>
+
+      <h2>مزوّدو الخدمة</h2>
+      <p>
+        نعتمد على <strong>Supabase</strong> للاستضافة والمصادقة وقاعدة البيانات؛ تُخزَّن
+        بياناتك على بنيتها التحتية المُدارة، ويحكم ذلك
+        <a href="https://supabase.com/privacy">سياسة خصوصية Supabase</a>. لا يدمج نسب أي
+        مزوّد إعلانات أو تحليلات أو تتبّع.
+      </p>
+
+      <h2>الأطفال</h2>
+      <p>
+        التطبيق ليس موجَّهاً للأطفال كمستخدمين. قد تتضمّن الشجرة قُصّراً يُدخلهم مالكها،
+        وتحميهم إعدادات خصوصية الأحياء الافتراضية. لطلب إزالة بيانات قاصر، راسلنا.
+      </p>
+
+      <h2>التغييرات على هذه السياسة</h2>
+      <p>إذا غيّرنا هذه السياسة، سنحدّث التاريخ في الأعلى وننشر النسخة الجديدة على العنوان نفسه.</p>
+
+      <h2>للتواصل</h2>
+      <p><strong>الكفافي</strong> &mdash; <a href="mailto:support@kefafi.dev">support@kefafi.dev</a></p>
+""", "en": """
+      <p>
+        Nasab is made by <strong>Kefafi</strong> (&ldquo;we&rdquo;, &ldquo;us&rdquo;).
+        Nasab is a <strong>private</strong> family-tree app for Arab families. It is
+        <strong>not a social network</strong>: there is no public feed, no discovery,
+        and no shared directory. This policy explains what we collect and how we use
+        and protect it.
+      </p>
+      <p>
+        So you can reach your tree from your devices and share it with people you
+        choose, Nasab stores your data on a secure server with our service provider,
+        <strong>under your control</strong>. The core principle: you own your tree, you
+        control who sees it, and you can revoke access at any time.
+      </p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Your account:</strong> your email address and password (stored hashed — we never see it), and an optional display name and preferred language.</li>
+        <li><strong>About email:</strong> the app does <strong>not</strong> verify that you own the email address. <strong>Use an email you control</strong> — it is how you reset your password and receive invitations.</li>
+        <li><strong>The tree content you enter:</strong> relatives' names (Arabic and Latin), gender, relationships and marriages, birth/death dates (Hijri and Gregorian), places, biographies, <strong>photo URLs you provide</strong> (we store the link you enter, not uploaded image files), tribe affiliations, and per-record privacy settings.</li>
+        <li><strong>Sharing data:</strong> the email addresses you invite and the roles you grant them.</li>
+        <li><strong>Technical logs:</strong> standard server logs (IP address, timestamps) kept by our infrastructure provider.</li>
+      </ul>
+
+      <h2>How we use it</h2>
+      <p>
+        We use it only to run the app: to sign you in, store and display your tree,
+        enforce the privacy and sharing settings you choose, and keep the service
+        secure. Nothing else.
+      </p>
+
+      <h2>What we don't do</h2>
+      <ul>
+        <li><strong>No advertising.</strong></li>
+        <li><strong>No third-party analytics or tracking.</strong></li>
+        <li><strong>We never sell your data.</strong></li>
+      </ul>
+
+      <h2>Where your data is stored, and security</h2>
+      <p>
+        Your data is stored in a <strong>Supabase</strong> (Postgres) database with
+        Row-Level Security and is <strong>private by default</strong>.
+        <strong>Living people are private by default.</strong> Data travels over
+        encrypted connections (HTTPS), and passwords are stored hashed.
+      </p>
+
+      <h2>Sharing and privacy</h2>
+      <p>
+        Sharing is yours to control, per tree: you invite someone with a link and grant
+        a <strong>viewer</strong> (read) or <strong>editor</strong> role, and you can
+        revoke access at any time. Every record has its own visibility, and living
+        people are private by default.
+      </p>
+
+      <h2>Data about other people</h2>
+      <p>
+        By its nature, Nasab records family members, who may include minors. You are
+        responsible for what you enter and must have the right or consent to record
+        other people's information. Defaults protect the living, and anyone may contact
+        us to review or remove their data.
+      </p>
+
+      <h2>Your rights</h2>
+      <ul>
+        <li><strong>Access and correction:</strong> view and edit your data in the app.</li>
+        <li><strong>Export:</strong> export your tree as <strong>GEDCOM</strong>.</li>
+        <li><strong>Deletion:</strong> delete your account and all your data — see <a href="%%B%%/nasab/support/#delete">Account deletion</a>.</li>
+      </ul>
+
+      <h2>Account and data deletion</h2>
+      <p>
+        You can delete your account from inside the app at any time: menu &rarr;
+        &ldquo;Delete account&rdquo; &rarr; confirm. This deletes your account, every
+        tree you own and all the people and marriages in them, and all sharing grants to
+        and from your account &mdash; <strong>immediately and permanently</strong>.
+        Tribes you created remain as shared reference for others. If you cannot sign in,
+        email <a href="mailto:support@kefafi.dev">support@kefafi.dev</a> and we will do
+        it for you. Full details on the <a href="%%B%%/nasab/support/#delete">support page</a>.
+      </p>
+
+      <h2>Service providers</h2>
+      <p>
+        We rely on <strong>Supabase</strong> for hosting, authentication, and the
+        database; your data is stored on its managed infrastructure, governed by
+        <a href="https://supabase.com/privacy">Supabase's Privacy Policy</a>. Nasab
+        integrates no advertising, analytics, or tracking provider.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        The app is not directed at children as users. A tree may include minors entered
+        by its owner; the living-person privacy defaults protect them. To request
+        removal of a minor's data, contact us.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>If we change this policy, we will update the date above and post the new version at the same address.</p>
+
+      <h2>Contact</h2>
+      <p><strong>Kefafi</strong> &mdash; <a href="mailto:support@kefafi.dev">support@kefafi.dev</a></p>
+"""}},
+
+ "terms": {
+  "eyebrow": {"ar": "شروط الاستخدام", "en": "Terms of Service"},
+  "h1": {"ar": "شروط الاستخدام — نسب", "en": "Terms of Service — Nasab"},
+  "title": {"ar": "شروط الاستخدام — نسب", "en": "Terms of Service — Nasab"},
+  "desc": {"ar": "شروط استخدام تطبيق نسب لشجرة العائلة.",
+           "en": "Terms of Service for the Nasab family-tree app."},
+  "meta": {"ar": "آخر تحديث 23 يونيو 2026", "en": "Last updated 23 June 2026"},
+  "body": {"ar": """
+      <p>
+        مرحباً بك في نسب، تطبيق شجرة العائلة من <strong>الكفافي</strong> («نحن»).
+        باستخدامك نسب فإنك توافق على هذه الشروط. إن لم توافق عليها فلا تستخدم التطبيق.
+      </p>
+
+      <h2>الخدمة</h2>
+      <p>
+        نسب تطبيق <strong>خاص</strong> لبناء شجرة عائلتك وإدارتها ومشاركتها وفق إعداداتك.
+        ليس شبكة اجتماعية: لا نشر عام، ولا اكتشاف، ولا دليل مشترك.
+      </p>
+
+      <h2>حسابك</h2>
+      <p>
+        لإنشاء حساب تزوّدنا ببريد إلكتروني وكلمة مرور. <strong>لا يتحقّق التطبيق من ملكيتك
+        للبريد</strong>، فاستخدم بريداً تملكه. أنت مسؤول عن سرّية بيانات دخولك وعن كل نشاط
+        يجري عبر حسابك.
+      </p>
+
+      <h2>محتواك ومسؤوليتك</h2>
+      <p>
+        أنت تملك ما تُدخله وتتحمّل مسؤوليته. وعند تسجيل بيانات عن أشخاص آخرين — ولا سيما
+        الأحياء والقُصّر — يجب أن تملك الحق أو الإذن في ذلك. لا تُدخل محتوى مخالفاً للقانون
+        أو منتهكاً لحقوق غيرك. أنت تمنحنا إذناً محدوداً بتخزين محتواك ومعالجته وعرضه لغرض
+        تقديم الخدمة لك فقط — لا نبيعه ولا نستخدمه لغير ذلك.
+      </p>
+
+      <h2>الاستخدام المقبول</h2>
+      <ul>
+        <li>لا تستخدم نسب لأي غرض غير قانوني.</li>
+        <li>لا تحاول اختراق خصوصية الآخرين أو أمن الخدمة أو الوصول غير المصرّح به.</li>
+        <li>لا تُسئ استخدام الخدمة أو تعطّلها.</li>
+      </ul>
+
+      <h2>المشاركة</h2>
+      <p>المشاركة بيدك وعلى مستوى كل شجرة (مُطّلِع أو محرِّر)، وقابلة للسحب في أي وقت. أنت مسؤول عمّن تمنحه الوصول.</p>
+
+      <h2>الخصوصية</h2>
+      <p>تحكم معالجتَنا لبياناتك <a href="%%B%%/nasab/privacy/">سياسة الخصوصية</a>، وهي جزء من هذه الشروط.</p>
+
+      <h2>الخدمة «كما هي»</h2>
+      <p>
+        تُقدَّم الخدمة «كما هي» دون ضمانات. قد نعدّلها أو نوقفها أو نوقف ميزات منها. احتفظ
+        بنسخك الخاصة عبر <strong>تصدير GEDCOM</strong> من داخل التطبيق.
+      </p>
+
+      <h2>حدود المسؤولية</h2>
+      <p>
+        إلى الحد الذي يسمح به النظام، لا نتحمّل مسؤولية أي أضرار غير مباشرة أو تبعية ناشئة
+        عن استخدامك للخدمة، ولا عن فقدان بيانات لم تحتفظ بنسخة منها.
+      </p>
+
+      <h2>الإنهاء</h2>
+      <p>
+        يمكنك حذف حسابك في أي وقت (انظر <a href="%%B%%/nasab/support/#delete">حذف الحساب</a>).
+        ولنا أن نوقف الوصول أو نُنهيه عند مخالفة هذه الشروط.
+      </p>
+
+      <h2>التغييرات على الشروط</h2>
+      <p>قد نحدّث هذه الشروط؛ سننشر النسخة الجديدة على العنوان نفسه ونحدّث التاريخ أعلاه.</p>
+
+      <h2>القانون الحاكم</h2>
+      <p>تخضع هذه الشروط لأنظمة <strong>المملكة العربية السعودية</strong>.</p>
+
+      <h2>للتواصل</h2>
+      <p><strong>الكفافي</strong> &mdash; <a href="mailto:support@kefafi.dev">support@kefafi.dev</a></p>
+""", "en": """
+      <p>
+        Welcome to Nasab, the family-tree app by <strong>Kefafi</strong>
+        (&ldquo;we&rdquo;, &ldquo;us&rdquo;). By using Nasab you agree to these Terms.
+        If you do not agree, do not use the app.
+      </p>
+
+      <h2>The service</h2>
+      <p>
+        Nasab is a <strong>private</strong> app for building, managing, and sharing your
+        family tree according to your settings. It is not a social network: no public
+        posting, no discovery, no shared directory.
+      </p>
+
+      <h2>Your account</h2>
+      <p>
+        To create an account you provide an email and password. The app
+        <strong>does not verify that you own the email</strong>, so use an email you
+        control. You are responsible for keeping your credentials safe and for activity
+        under your account.
+      </p>
+
+      <h2>Your content and responsibility</h2>
+      <p>
+        You own and are responsible for what you enter. When you record information about
+        other people &mdash; especially living people and minors &mdash; you must have
+        the right or consent to do so. Do not enter content that is unlawful or infringes
+        others' rights. You grant us a limited permission to store, process, and display
+        your content solely to provide the service to you &mdash; we do not sell it or
+        use it for anything else.
+      </p>
+
+      <h2>Acceptable use</h2>
+      <ul>
+        <li>Do not use Nasab for any unlawful purpose.</li>
+        <li>Do not attempt to breach others' privacy, the security of the service, or gain unauthorized access.</li>
+        <li>Do not misuse or disrupt the service.</li>
+      </ul>
+
+      <h2>Sharing</h2>
+      <p>Sharing is yours to control, per tree (viewer or editor), and revocable at any time. You are responsible for whom you grant access.</p>
+
+      <h2>Privacy</h2>
+      <p>Our handling of your data is governed by the <a href="%%B%%/nasab/privacy/">Privacy Policy</a>, which is part of these Terms.</p>
+
+      <h2>Service provided &ldquo;as is&rdquo;</h2>
+      <p>
+        The service is provided &ldquo;as is,&rdquo; without warranties. We may change,
+        suspend, or discontinue features. Keep your own copies by using
+        <strong>GEDCOM export</strong> in the app.
+      </p>
+
+      <h2>Limitation of liability</h2>
+      <p>To the extent permitted by law, we are not liable for indirect or consequential damages arising from your use of the service, nor for loss of data you did not back up.</p>
+
+      <h2>Termination</h2>
+      <p>You may delete your account at any time (see <a href="%%B%%/nasab/support/#delete">Account deletion</a>). We may suspend or terminate access for violations of these Terms.</p>
+
+      <h2>Changes to these Terms</h2>
+      <p>We may update these Terms; we will post the new version at the same address and update the date above.</p>
+
+      <h2>Governing law</h2>
+      <p>These Terms are governed by the laws of the <strong>Kingdom of Saudi Arabia</strong>.</p>
+
+      <h2>Contact</h2>
+      <p><strong>Kefafi</strong> &mdash; <a href="mailto:support@kefafi.dev">support@kefafi.dev</a></p>
+"""}},
+
+ "support": {
+  "eyebrow": {"ar": "الدعم", "en": "Support"},
+  "h1": {"ar": "دعم نسب", "en": "Nasab Support"},
+  "title": {"ar": "الدعم — نسب", "en": "Support — Nasab"},
+  "desc": {"ar": "دعم نسب: أسئلة شائعة وكيفية حذف الحساب والبيانات.",
+           "en": "Nasab support: FAQ and how to delete your account and data."},
+  "meta": {"ar": "للمساعدة: support@kefafi.dev", "en": "Help: support@kefafi.dev"},
+  "body": {"ar": """
+      <p>نحن هنا للمساعدة. لأي سؤال أو مشكلة، راسلنا على <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.</p>
+
+      <h2>الأسئلة الشائعة</h2>
+
+      <h3>ما هو نسب؟</h3>
+      <p>تطبيق خاص لبناء شجرة عائلتك ومشاركتها مع من تختار. ليس شبكة اجتماعية: لا موجز عام ولا اكتشاف.</p>
+
+      <h3>كيف أعيد تعيين كلمة المرور؟</h3>
+      <p>من شاشة تسجيل الدخول اختر «نسيت كلمة المرور؟» وأدخل بريدك، فيصلك <strong>رمز</strong>؛ ثم أدخل الرمز وكلمة المرور الجديدة.</p>
+
+      <h3>لم يصلني الرمز.</h3>
+      <p>بما أن التطبيق لا يتحقّق من ملكية البريد، تأكّد أنك استخدمت <strong>بريداً تملكه</strong> وكتبته بشكل صحيح، وافحص مجلد البريد غير المرغوب. إن استمرّت المشكلة فراسل الدعم.</p>
+
+      <h3>كيف تعمل المشاركة؟</h3>
+      <p>على مستوى كل شجرة: تدعو شخصاً برابط وتمنحه دور «مُطّلِع» أو «محرِّر»، ويمكنك سحب الوصول في أي وقت.</p>
+
+      <h3>من يرى شجرتي؟</h3>
+      <p>شجرتك خاصة افتراضياً، و<strong>الأشخاص الأحياء خاصون افتراضياً</strong>. أنت تتحكّم بظهور كل سجل.</p>
+
+      <h3>كيف أصدّر بياناتي؟</h3>
+      <p>يمكنك تصدير شجرتك بصيغة <strong>GEDCOM</strong> من داخل التطبيق.</p>
+
+      <h3>كيف أصحّح معلومة؟</h3>
+      <p>تعدّل أي سجل مباشرةً داخل التطبيق.</p>
+
+      <h3>ماذا عن الصور؟</h3>
+      <p>تزوّد نسب برابط الصورة؛ ويخزّن التطبيق الرابط لا ملف الصورة.</p>
+
+      <h2 id="delete">حذف الحساب والبيانات</h2>
+      <p>لحذف حسابك من داخل التطبيق: <strong>القائمة ← «حذف الحساب» ← تأكيد</strong>.</p>
+      <p><strong>ماذا يُحذف:</strong></p>
+      <ul>
+        <li>حسابك (تسجيل الدخول).</li>
+        <li>كل شجرة تملكها، وكل الأشخاص والزيجات فيها.</li>
+        <li>كل صلاحيات المشاركة من حسابك وإليه.</li>
+      </ul>
+      <p>الحذف <strong>فوري ودائم ولا يمكن التراجع عنه</strong>.</p>
+      <p><strong>ما الذي يبقى:</strong> القبائل التي أنشأتها تبقى مرجعاً مشتركاً يستفيد منه غيرك.</p>
+      <p>إن تعذّر عليك تسجيل الدخول، راسلنا على <a href="mailto:support@kefafi.dev">support@kefafi.dev</a> من بريدك المسجَّل وسنتولّى الحذف.</p>
+
+      <h2>للتواصل</h2>
+      <p><strong>الكفافي</strong> &mdash; <a href="mailto:support@kefafi.dev">support@kefafi.dev</a></p>
+""", "en": """
+      <p>We're here to help. For any question or problem, email <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.</p>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>What is Nasab?</h3>
+      <p>A private app for building and sharing your family tree with people you choose. It is not a social network: no public feed, no discovery.</p>
+
+      <h3>How do I reset my password?</h3>
+      <p>On the sign-in screen, choose &ldquo;Forgot password?&rdquo; and enter your email. You'll receive a <strong>code</strong>; enter the code and your new password.</p>
+
+      <h3>I didn't get the code.</h3>
+      <p>Because the app does not verify email ownership, make sure you used an <strong>email you own</strong> and typed it correctly, and check your spam folder. If it still doesn't arrive, contact support.</p>
+
+      <h3>How does sharing work?</h3>
+      <p>Per tree: you invite someone with a link and grant a &ldquo;viewer&rdquo; or &ldquo;editor&rdquo; role, and you can revoke access at any time.</p>
+
+      <h3>Who can see my tree?</h3>
+      <p>Your tree is private by default, and <strong>living people are private by default</strong>. You control the visibility of each record.</p>
+
+      <h3>Can I export my data?</h3>
+      <p>Yes — export your tree as <strong>GEDCOM</strong> from inside the app.</p>
+
+      <h3>How do I correct information?</h3>
+      <p>Edit any record directly in the app.</p>
+
+      <h3>What about photos?</h3>
+      <p>You give Nasab a photo URL; the app stores the link, not the image file.</p>
+
+      <h2 id="delete">Account and data deletion</h2>
+      <p>To delete your account from inside the app: <strong>menu &rarr; &ldquo;Delete account&rdquo; &rarr; confirm</strong>.</p>
+      <p><strong>What is deleted:</strong></p>
+      <ul>
+        <li>Your account (your login).</li>
+        <li>Every tree you own, and all people and marriages in them.</li>
+        <li>All sharing grants to and from your account.</li>
+      </ul>
+      <p>Deletion is <strong>immediate, permanent, and irreversible</strong>.</p>
+      <p><strong>What remains:</strong> tribes you created remain as shared reference for others.</p>
+      <p>If you cannot sign in, email <a href="mailto:support@kefafi.dev">support@kefafi.dev</a> from your registered email and we will delete it for you.</p>
+
+      <h2>Contact</h2>
+      <p><strong>Kefafi</strong> &mdash; <a href="mailto:support@kefafi.dev">support@kefafi.dev</a></p>
+"""}},
+}
+
+def page_legal(lang, slug):
+    pg = NASAB_PAGES[slug]
+    b = base(lang)
+    alt_url = {"ar": f"/nasab/{slug}/", "en": f"/en/nasab/{slug}/"}
+    canonical = DOMAIN + b + f"/nasab/{slug}/"
+    body = pg["body"][lang].replace("%%B%%", b)
+    nasab_name = "نسب" if lang == "ar" else "Nasab"
+    return head(lang, pg["title"][lang], pg["desc"][lang], canonical, alt_url, extra="/nasab/favicon.svg") + header(lang, None, alt_url) + f"""  <main class="wrap">
+    <a class="back-link" href="{b}/nasab/"><span class="mono">{back_arrow(lang)}</span>{nasab_name}</a>
+    <div class="prose text-col">
+      <p class="eyebrow">{e(pg['eyebrow'][lang])}</p>
+      <h1>{e(pg['h1'][lang])}</h1>
+      <p class="meta">{e(pg['meta'][lang])}</p>
+{body}
+    </div>
+  </main>
+""" + footer(lang)
+
 # ---------------------------------------------------------------- favicons
 def favicon(mono, tile):
     bg = "#1C1815" if tile == "ink" else "#C0502A"
@@ -545,7 +1015,9 @@ def sitemap():
     for p in PRODUCTS:
         add(f"{DOMAIN}/{p['id']}/", "monthly", "0.8")
         add(f"{DOMAIN}/en/{p['id']}/", "monthly", "0.7")
-    add(DOMAIN + "/nasab/privacy/", "yearly", "0.4")
+    for slug in ["privacy", "terms", "support"]:
+        add(f"{DOMAIN}/nasab/{slug}/", "yearly", "0.5")
+        add(f"{DOMAIN}/en/nasab/{slug}/", "yearly", "0.4")
     add(DOMAIN + "/daftar/privacy/", "yearly", "0.4")
     add(DOMAIN + "/sayla/privacy/", "yearly", "0.4")
     body = "\n".join(urls)
@@ -563,6 +1035,8 @@ for lang in ("ar", "en"):
     write(pref + "contact/index.html", page_contact(lang))
     for p in PRODUCTS:
         write(pref + p["id"] + "/index.html", page_product(lang, p))
+    for slug in ("privacy", "terms", "support"):
+        write(pref + "nasab/" + slug + "/index.html", page_legal(lang, slug))
 
 write("nasab/favicon.svg", favicon("ن", "ink"))
 write("lumen/favicon.svg", favicon("ل", "ink"))

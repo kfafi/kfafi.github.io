@@ -88,6 +88,36 @@
     <loc>https://kefafi.dev/nasab/privacy/</loc>
     <lastmod>2026-06-23</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kefafi.dev/en/nasab/privacy/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://kefafi.dev/nasab/terms/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kefafi.dev/en/nasab/terms/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://kefafi.dev/nasab/support/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kefafi.dev/en/nasab/support/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>

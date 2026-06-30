@@ -387,6 +387,15 @@ html[lang="ar"] .prose h1 { font-family: var(--font-arabic-display); }
 }
 .site-footer__bottom .mono { font-size: 11px; letter-spacing: 0.06em; }
 
+/* product-page legal links (Privacy · Terms · Support) */
+.legal-links { font-size: 14px; color: var(--ink-500); margin: 14px 0 0; }
+.legal-links a { color: var(--clay-600); text-decoration: none; }
+.legal-links a:hover { text-decoration: underline; }
+.legal-links .sep { margin: 0 8px; color: var(--ink-300); }
+
+/* deep-link targets (e.g. /nasab/support/#delete) clear the sticky header */
+[id] { scroll-margin-top: 84px; }
+
 /* ---- Accessibility ------------------------------------------ */
 :focus-visible { outline: 2px solid var(--clay-500); outline-offset: 2px; }
 
