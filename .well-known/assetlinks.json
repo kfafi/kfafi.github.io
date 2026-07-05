@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.kefafi.family_tree",
+      "sha256_cert_fingerprints": [
+        "99:E3:B6:37:17:38:BC:42:CC:F1:C5:59:13:01:08:19:53:77:2B:0A:57:9B:DA:02:E9:8E:06:E6:89:95:22:4B"
+      ]
+    }
+  }
+]
