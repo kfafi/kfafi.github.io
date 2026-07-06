@@ -13,6 +13,7 @@ the studio favicon, or CNAME/robots.txt/.nojekyll.
     python3 tools/build.py
 """
 import html, os
+from urllib.parse import quote as urlquote
 
 # Repo root = parent of this tools/ directory, so the script is path-portable.
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -106,7 +107,7 @@ T = {
   "viewLabel": "اعرف أكثر",
   "principlesEyebrow": "كيف نبني", "principlesTitle": "مبادئ قليلة، نلتزم بها.",
   "closingEyebrow": "تواصل", "closingTitle": "فكرةٌ، أو سؤال؟", "closingSub": "نحب أن نسمع منك.",
-  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم",
+  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية",
   "aboutEyebrow": "الاستوديو", "aboutTitle": "ما يكفي فقط.",
   "aboutP1": "كفافي استوديو برمجيات مستقل صغير. نصنع أدوات هادئة للحياة اليومية — أداةٌ تفعل شيئاً واحداً جيداً، ثم تبتعد عن طريقك.",
   "aboutP2": "نبني بلغةٍ عربية أولاً، ودون اتصال حيثما أمكن. بياناتك تبقى معك. واجهاتنا دافئة، بلونٍ واحد، بلا ضجيج.",
@@ -127,7 +128,7 @@ T = {
   "viewLabel": "Learn more",
   "principlesEyebrow": "How we build", "principlesTitle": "A few principles, kept.",
   "closingEyebrow": "Get in touch", "closingTitle": "An idea, or a question?", "closingSub": "We'd love to hear from you.",
-  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support",
+  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta",
   "aboutEyebrow": "The studio", "aboutTitle": "Just enough.",
   "aboutP1": "Kefafi is a small, independent software studio. We make calm tools for everyday personal life — software that does one thing well, then gets out of your way.",
   "aboutP2": "We build Arabic-first and offline-where-we-can. Your data stays yours. Our interfaces are warm, single-accent, and quiet.",
@@ -396,6 +397,13 @@ def page_product(lang, p):
                      f'<a href="{b}/nasab/support/">{e(t["supportLabel"])}</a></p>')
     elif p.get("privacy"):
         privacy_link = f'\n            <a class="btn btn--ghost" href="/{pid}/privacy/">{e(t["privacyLabel"])}</a>'
+    if p.get("android"):  # beta available → lead with "Try the beta"
+        cta_buttons = (f'<a class="btn btn--primary" href="{b}/{pid}/test/">{e(t["tryBeta"])}</a>\n'
+                       f'          <a class="btn btn--ghost" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
+                       f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>')
+    else:
+        cta_buttons = (f'<a class="btn btn--primary" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
+                       f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>')
     title = f"{p['name']} — {p['tagline'][lang]}"
     desc = p["line"][lang]
     return head(lang, title, desc, canonical, alt_url, extra=f"/{pid}/favicon.svg") + header(lang, None, alt_url) + f"""  <main class="wrap">
@@ -409,8 +417,7 @@ def page_product(lang, p):
         <p class="prod-hero__intro">{e(p['intro'][lang])}</p>
         <div class="badges">{badges}</div>
         <div class="btn-row">
-          <a class="btn btn--primary" href="{GITHUB}" target="_blank" rel="noopener">{e(t['ctaGithub'])}</a>
-          <a class="btn btn--ghost" href="{b}/contact/">{e(t['navContact'])}</a>{privacy_link}
+          {cta_buttons}{privacy_link}
         </div>{legal_row}
       </div>
     </section>
@@ -986,61 +993,70 @@ def page_legal(lang, slug):
   </main>
 """ + footer(lang)
 
-# ---------------------------------------------------------------- tester opt-in (closed testing)
+# ---------------------------------------------------------------- join the beta (public)
 def page_test(lang, p):
     pid = p["id"]; b = base(lang); pkg = p["android"]
     optin = f"https://play.google.com/apps/testing/{pkg}"
     listing = f"https://play.google.com/store/apps/details?id={pkg}"
+    subj = urlquote(f"{p['name']} closed test — add me")
+    body = urlquote(f"Please add this Google account to the {p['name']} closed test on Google Play:\n\nEmail: ")
+    request = f"mailto:support@kefafi.dev?subject={subj}&body={body}"
     alt_url = {"ar": f"/{pid}/test/", "en": f"/en/{pid}/test/"}
     canonical = DOMAIN + b + f"/{pid}/test/"
     C = {
       "ar": {
-        "eyebrow": "نسخة تجريبية",
+        "eyebrow": "النسخة التجريبية",
         "title": f"جرّب {p['ar']} — النسخة التجريبية على Google Play",
-        "desc": f"انضمّ إلى الاختبار المغلق لتطبيق {p['ar']} على Google Play.",
+        "desc": f"{p['ar']} متاح كنسخة تجريبية مغلقة على Google Play. اعرف كيف تنضمّ إلى مجموعة الاختبار.",
         "h1": f"جرّب {p['ar']} — النسخة التجريبية",
-        "intro": f"أنت مدعوّ لتجربة {p['ar']} قبل إطلاقه، عبر الاختبار المغلق على Google Play. اتبع الخطوات لتثبيت النسخة التجريبية.",
-        "join": "انضمّ للاختبار", "open": "افتح في Google Play", "how": "كيف تنضمّ",
+        "intro": f"{p['ar']} متاح حالياً كنسخة تجريبية مغلقة على Google Play. انضمّ إلى مجموعة الاختبار لتجربته قبل الإطلاق، وساعدنا بملاحظاتك.",
+        "how": "كيف تنضمّ إلى مجموعة الاختبار",
+        "howintro": "الاختبار مغلق، لذا نضيف بريدك يدوياً أولاً. ثلاث خطوات:",
         "steps": [
-          "سجّل الدخول إلى Google Play بالبريد نفسه الذي أُضيف إلى قائمة المختبِرين.",
-          "اضغط «انضمّ للاختبار» أدناه، ثم اقبل الدعوة.",
-          "عُد إلى Google Play وثبّت التطبيق.",
+          "أرسل لنا بريد حساب Google الذي تستخدمه على متجر Play — عبر زر «اطلب الانضمام» أدناه — لنضيفك إلى قائمة المختبِرين.",
+          "بعد أن نؤكّد إضافتك، افتح «انضمّ للاختبار» وسجّل الدخول بالبريد نفسه، ثم اقبل الدعوة.",
+          f"عُد إلى Google Play وثبّت {p['ar']}.",
         ],
-        "note": "لا بدّ أن يكون بريدك ضمن قائمة المختبِرين لدينا. وقد يستغرق ظهور التطبيق بضع دقائق بعد قبول الدعوة.",
+        "request": "اطلب الانضمام", "join": "انضمّ للاختبار", "open": "افتح في Google Play",
+        "note": "بعد إضافة بريدك وقبولك الدعوة، قد يستغرق ظهور التطبيق في المتجر بضع دقائق.",
         "contacth": "للمساعدة",
-        "contact": 'راسلنا على <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.',
+        "contact": 'لأي سؤال، راسلنا على <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.',
         "back": p["ar"],
       },
       "en": {
         "eyebrow": "Beta",
         "title": f"Try {p['name']} — Google Play beta",
-        "desc": f"Join the {p['name']} closed test on Google Play.",
+        "desc": f"{p['name']} is a closed beta on Google Play. See how to join the testing group.",
         "h1": f"Try {p['name']} — beta",
-        "intro": f"You're invited to try {p['name']} before launch, through Google Play closed testing. Follow the steps to install the beta.",
-        "join": "Join the test", "open": "Open in Google Play", "how": "How to join",
+        "intro": f"{p['name']} is currently a closed beta on Google Play. Join the testing group to try it before launch and help us with your feedback.",
+        "how": "How to join the testing group",
+        "howintro": "The test is closed, so we add your email first. Three steps:",
         "steps": [
-          "Sign in to Google Play with the same email that was added to our tester list.",
-          "Tap “Join the test” below, then accept the invitation.",
-          "Return to Google Play and install the app.",
+          "Send us the Google account you use on the Play Store — via the “Request to join” button below — so we can add you to the tester list.",
+          "Once we confirm you're added, open “Join the test,” sign in with that same email, and accept the invitation.",
+          f"Return to Google Play and install {p['name']}.",
         ],
-        "note": "Your email must be on our tester list. It can take a few minutes for the app to appear after you accept.",
+        "request": "Request to join", "join": "Join the test", "open": "Open in Google Play",
+        "note": "After your email is added and you accept, it can take a few minutes for the app to appear in the store.",
         "contacth": "Need help",
-        "contact": 'Email <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.',
+        "contact": 'For any question, email <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.',
         "back": p["name"],
       },
     }[lang]
     steps = "".join(f"\n        <li>{e(s)}</li>" for s in C["steps"])
-    return head(lang, C["title"], C["desc"], canonical, alt_url, extra=f"/{pid}/favicon.svg", noindex=True) + header(lang, None, alt_url) + f"""  <main class="wrap">
+    return head(lang, C["title"], C["desc"], canonical, alt_url, extra=f"/{pid}/favicon.svg") + header(lang, None, alt_url) + f"""  <main class="wrap">
     <a class="back-link" href="{b}/{pid}/"><span class="mono">{back_arrow(lang)}</span>{e(C['back'])}</a>
     <div class="prose text-col">
       <p class="eyebrow">{e(C['eyebrow'])}</p>
       <h1>{e(C['h1'])}</h1>
       <p>{e(C['intro'])}</p>
       <div class="btn-row" style="margin-bottom:8px;">
-        <a class="btn btn--primary btn--lg" href="{optin}" target="_blank" rel="noopener">{e(C['join'])}</a>
-        <a class="btn btn--outline" href="{listing}" target="_blank" rel="noopener">{e(C['open'])}</a>
+        <a class="btn btn--primary btn--lg" href="{request}">{e(C['request'])}</a>
+        <a class="btn btn--outline" href="{optin}" target="_blank" rel="noopener">{e(C['join'])}</a>
+        <a class="btn btn--ghost" href="{listing}" target="_blank" rel="noopener">{e(C['open'])}</a>
       </div>
       <h2>{e(C['how'])}</h2>
+      <p>{e(C['howintro'])}</p>
       <ol>{steps}
       </ol>
       <p class="meta">{e(C['note'])}</p>
@@ -1080,6 +1096,9 @@ def sitemap():
     for p in PRODUCTS:
         add(f"{DOMAIN}/{p['id']}/", "monthly", "0.8")
         add(f"{DOMAIN}/en/{p['id']}/", "monthly", "0.7")
+        if p.get("android"):  # public "join the beta" page
+            add(f"{DOMAIN}/{p['id']}/test/", "monthly", "0.6")
+            add(f"{DOMAIN}/en/{p['id']}/test/", "monthly", "0.5")
     for slug in ["privacy", "terms", "support"]:
         add(f"{DOMAIN}/nasab/{slug}/", "yearly", "0.5")
         add(f"{DOMAIN}/en/nasab/{slug}/", "yearly", "0.4")
