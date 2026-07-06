@@ -58,7 +58,7 @@ PRODUCTS = [
         {"ar": "عبر Google Drive الخاص بك.", "en": "Through your own Google Drive."},
         {"ar": "لا خادم يرى بياناتك.", "en": "No server ever sees your data."},
         {"ar": "إضافة متصفّح + تطبيق جوال.", "en": "Browser extension + mobile app."},
-     ], "privacy": True, "android": "com.kfafi.sharebullet"},
+     ], "privacy": True, "android": "com.kefafi.sayla"},
     {"id": "lumen", "mono": "ل", "tile": "ink", "name": "Lumen", "ar": "لومن",
      "tagline": {"ar": "هادئ على الشاشة الكبيرة.", "en": "Calm on the big screen."},
      "line": {"ar": "تطبيق لتلفاز أندرويد، مع محدِّث داخل التطبيق.",
