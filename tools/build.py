@@ -32,7 +32,7 @@ PRODUCTS = [
         {"ar": "ثلاثة أجيال في لمحة واحدة.", "en": "Three generations at a glance."},
         {"ar": "تتحكّم بالمشاركة، وتسحبها متى شئت.", "en": "You control sharing — revocable anytime."},
         {"ar": "خصوصية محفوظة للأحياء.", "en": "Privacy for the living."},
-     ], "privacy": True},
+     ], "privacy": True, "android": "dev.kefafi.family_tree"},
     {"id": "daftar", "mono": "د", "tile": "clay", "name": "Daftar", "ar": "دفتر",
      "tagline": {"ar": "سجّل اللعب بلا ورقة.", "en": "Score the game, no paper."},
      "line": {"ar": "تتبّع نقاط الكنكان والبلوت. بديل الدفتر الورقي. دون اتصال، بلا حسابات.",
@@ -45,7 +45,7 @@ PRODUCTS = [
         {"ar": "مجاميع تلقائية، وتنبيه للأقرب للحد.", "en": "Auto totals; nearest-to-limit flagged."},
         {"ar": "إدخال سريع أو يدوي للجولة.", "en": "Quick or manual round entry."},
         {"ar": "دون اتصال، بلا حسابات، بلا سحابة.", "en": "Offline, no accounts, no cloud."},
-     ], "privacy": True},
+     ], "privacy": True, "android": "dev.kefafi.daftar"},
     {"id": "sayla", "mono": "س", "tile": "clay", "name": "Sayla", "ar": "سيلة",
      "tagline": {"ar": "مرِّر بين أجهزتك.", "en": "Push across your devices."},
      "line": {"ar": "مرِّر الملاحظات والروابط والملفات بين أجهزتك عبر Google Drive الخاص بك. بلا خادم.",
@@ -58,7 +58,7 @@ PRODUCTS = [
         {"ar": "عبر Google Drive الخاص بك.", "en": "Through your own Google Drive."},
         {"ar": "لا خادم يرى بياناتك.", "en": "No server ever sees your data."},
         {"ar": "إضافة متصفّح + تطبيق جوال.", "en": "Browser extension + mobile app."},
-     ], "privacy": True},
+     ], "privacy": True, "android": "com.kfafi.sharebullet"},
     {"id": "lumen", "mono": "ل", "tile": "ink", "name": "Lumen", "ar": "لومن",
      "tagline": {"ar": "هادئ على الشاشة الكبيرة.", "en": "Calm on the big screen."},
      "line": {"ar": "تطبيق لتلفاز أندرويد، مع محدِّث داخل التطبيق.",
@@ -179,17 +179,18 @@ def by_id(pid): return next(p for p in PRODUCTS if p["id"] == pid)
 def tile_cls(tile): return "mono-tile--ink" if tile == "ink" else "mono-tile--clay"
 
 # ---------------------------------------------------------------- chrome
-def head(lang, title, desc, canonical, alt_url, extra=""):
+def head(lang, title, desc, canonical, alt_url, extra="", noindex=False):
     dirr = "rtl" if lang == "ar" else "ltr"
     og_locale = "ar_SA" if lang == "ar" else "en_US"
     og_alt = "en_US" if lang == "ar" else "ar_SA"
+    robots = '\n  <meta name="robots" content="noindex, follow">' if noindex else ""
     return f"""<!DOCTYPE html>
 <html lang="{lang}" dir="{dirr}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{e(title)}</title>
-  <meta name="description" content="{e(desc)}">
+  <meta name="description" content="{e(desc)}">{robots}
   <link rel="canonical" href="{canonical}">
   <link rel="alternate" hreflang="ar" href="{alt_url['ar']}">
   <link rel="alternate" hreflang="en" href="{alt_url['en']}">
@@ -985,6 +986,70 @@ def page_legal(lang, slug):
   </main>
 """ + footer(lang)
 
+# ---------------------------------------------------------------- tester opt-in (closed testing)
+def page_test(lang, p):
+    pid = p["id"]; b = base(lang); pkg = p["android"]
+    optin = f"https://play.google.com/apps/testing/{pkg}"
+    listing = f"https://play.google.com/store/apps/details?id={pkg}"
+    alt_url = {"ar": f"/{pid}/test/", "en": f"/en/{pid}/test/"}
+    canonical = DOMAIN + b + f"/{pid}/test/"
+    C = {
+      "ar": {
+        "eyebrow": "نسخة تجريبية",
+        "title": f"جرّب {p['ar']} — النسخة التجريبية على Google Play",
+        "desc": f"انضمّ إلى الاختبار المغلق لتطبيق {p['ar']} على Google Play.",
+        "h1": f"جرّب {p['ar']} — النسخة التجريبية",
+        "intro": f"أنت مدعوّ لتجربة {p['ar']} قبل إطلاقه، عبر الاختبار المغلق على Google Play. اتبع الخطوات لتثبيت النسخة التجريبية.",
+        "join": "انضمّ للاختبار", "open": "افتح في Google Play", "how": "كيف تنضمّ",
+        "steps": [
+          "سجّل الدخول إلى Google Play بالبريد نفسه الذي أُضيف إلى قائمة المختبِرين.",
+          "اضغط «انضمّ للاختبار» أدناه، ثم اقبل الدعوة.",
+          "عُد إلى Google Play وثبّت التطبيق.",
+        ],
+        "note": "لا بدّ أن يكون بريدك ضمن قائمة المختبِرين لدينا. وقد يستغرق ظهور التطبيق بضع دقائق بعد قبول الدعوة.",
+        "contacth": "للمساعدة",
+        "contact": 'راسلنا على <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.',
+        "back": p["ar"],
+      },
+      "en": {
+        "eyebrow": "Beta",
+        "title": f"Try {p['name']} — Google Play beta",
+        "desc": f"Join the {p['name']} closed test on Google Play.",
+        "h1": f"Try {p['name']} — beta",
+        "intro": f"You're invited to try {p['name']} before launch, through Google Play closed testing. Follow the steps to install the beta.",
+        "join": "Join the test", "open": "Open in Google Play", "how": "How to join",
+        "steps": [
+          "Sign in to Google Play with the same email that was added to our tester list.",
+          "Tap “Join the test” below, then accept the invitation.",
+          "Return to Google Play and install the app.",
+        ],
+        "note": "Your email must be on our tester list. It can take a few minutes for the app to appear after you accept.",
+        "contacth": "Need help",
+        "contact": 'Email <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.',
+        "back": p["name"],
+      },
+    }[lang]
+    steps = "".join(f"\n        <li>{e(s)}</li>" for s in C["steps"])
+    return head(lang, C["title"], C["desc"], canonical, alt_url, extra=f"/{pid}/favicon.svg", noindex=True) + header(lang, None, alt_url) + f"""  <main class="wrap">
+    <a class="back-link" href="{b}/{pid}/"><span class="mono">{back_arrow(lang)}</span>{e(C['back'])}</a>
+    <div class="prose text-col">
+      <p class="eyebrow">{e(C['eyebrow'])}</p>
+      <h1>{e(C['h1'])}</h1>
+      <p>{e(C['intro'])}</p>
+      <div class="btn-row" style="margin-bottom:8px;">
+        <a class="btn btn--primary btn--lg" href="{optin}" target="_blank" rel="noopener">{e(C['join'])}</a>
+        <a class="btn btn--outline" href="{listing}" target="_blank" rel="noopener">{e(C['open'])}</a>
+      </div>
+      <h2>{e(C['how'])}</h2>
+      <ol>{steps}
+      </ol>
+      <p class="meta">{e(C['note'])}</p>
+      <h2>{e(C['contacth'])}</h2>
+      <p>{C['contact']}</p>
+    </div>
+  </main>
+""" + footer(lang)
+
 # ---------------------------------------------------------------- favicons
 def favicon(mono, tile):
     bg = "#1C1815" if tile == "ink" else "#C0502A"
@@ -1037,6 +1102,10 @@ for lang in ("ar", "en"):
         write(pref + p["id"] + "/index.html", page_product(lang, p))
     for slug in ("privacy", "terms", "support"):
         write(pref + "nasab/" + slug + "/index.html", page_legal(lang, slug))
+    # Closed-testing opt-in pages — unlisted (noindex, not in sitemap or nav).
+    for p in PRODUCTS:
+        if p.get("android"):
+            write(pref + p["id"] + "/test/index.html", page_test(lang, p))
 
 write("nasab/favicon.svg", favicon("ن", "ink"))
 write("lumen/favicon.svg", favicon("ل", "ink"))
