@@ -1068,7 +1068,7 @@ def sitemap():
     def add(loc, freq, pri):
         urls.append(f"""  <url>
     <loc>{loc}</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <changefreq>{freq}</changefreq>
     <priority>{pri}</priority>
   </url>""")
