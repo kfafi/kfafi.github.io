@@ -387,6 +387,18 @@ html[lang="ar"] .prose h1 { font-family: var(--font-arabic-display); }
 }
 .site-footer__bottom .mono { font-size: 11px; letter-spacing: 0.06em; }
 
+/* ---- Home-card availability hints ---- */
+.card__stores { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+.store-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; color: var(--ink-500);
+  background: var(--surface-sunken); border: 1px solid var(--ink-100);
+  border-radius: var(--radius-full); padding: 3px 9px; line-height: 1.4;
+}
+.store-chip svg { width: 12px; height: 12px; flex: 0 0 auto; }
+.store-chip--beta { color: var(--clay-700); background: var(--clay-50); border-color: var(--clay-100); }
+.store-chip--soon { color: var(--ink-400); }
+
 /* ---- Store download badges + secondary CTA links ---- */
 .store-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 .store-btn {
