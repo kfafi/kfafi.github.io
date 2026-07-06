@@ -46,7 +46,8 @@ PRODUCTS = [
         {"ar": "مجاميع تلقائية، وتنبيه للأقرب للحد.", "en": "Auto totals; nearest-to-limit flagged."},
         {"ar": "إدخال سريع أو يدوي للجولة.", "en": "Quick or manual round entry."},
         {"ar": "دون اتصال، بلا حسابات، بلا سحابة.", "en": "Offline, no accounts, no cloud."},
-     ], "privacy": True, "android": "dev.kefafi.daftar"},
+     ], "privacy": True, "android": "dev.kefafi.daftar",
+     "stores": [{"kind": "appstore", "url": "https://apps.apple.com/us/app/daftar-baloot-kankan/id6781765878"}]},
     {"id": "sayla", "mono": "س", "tile": "clay", "name": "Sayla", "ar": "سيلة",
      "tagline": {"ar": "مرِّر بين أجهزتك.", "en": "Push across your devices."},
      "line": {"ar": "مرِّر الملاحظات والروابط والملفات بين أجهزتك عبر Google Drive الخاص بك. بلا خادم.",
@@ -59,7 +60,8 @@ PRODUCTS = [
         {"ar": "عبر Google Drive الخاص بك.", "en": "Through your own Google Drive."},
         {"ar": "لا خادم يرى بياناتك.", "en": "No server ever sees your data."},
         {"ar": "إضافة متصفّح + تطبيق جوال.", "en": "Browser extension + mobile app."},
-     ], "privacy": True, "android": "com.kefafi.sayla"},
+     ], "privacy": True, "android": "com.kefafi.sayla",
+     "stores": [{"kind": "chrome", "url": "https://chromewebstore.google.com/detail/njnafbnpbnjnlfeeaedpedlloecmoilp"}]},
     {"id": "lumen", "mono": "ل", "tile": "ink", "name": "Lumen", "ar": "لومن",
      "tagline": {"ar": "هادئ على الشاشة الكبيرة.", "en": "Calm on the big screen."},
      "line": {"ar": "تطبيق لتلفاز أندرويد، مع محدِّث داخل التطبيق.",
@@ -107,7 +109,7 @@ T = {
   "viewLabel": "اعرف أكثر",
   "principlesEyebrow": "كيف نبني", "principlesTitle": "مبادئ قليلة، نلتزم بها.",
   "closingEyebrow": "تواصل", "closingTitle": "فكرةٌ، أو سؤال؟", "closingSub": "نحب أن نسمع منك.",
-  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية",
+  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "androidBeta": "نسخة أندرويد التجريبية",
   "aboutEyebrow": "الاستوديو", "aboutTitle": "ما يكفي فقط.",
   "aboutP1": "كفافي استوديو برمجيات مستقل صغير. نصنع أدوات هادئة للحياة اليومية — أداةٌ تفعل شيئاً واحداً جيداً، ثم تبتعد عن طريقك.",
   "aboutP2": "نبني بلغةٍ عربية أولاً، ودون اتصال حيثما أمكن. بياناتك تبقى معك. واجهاتنا دافئة، بلونٍ واحد، بلا ضجيج.",
@@ -128,7 +130,7 @@ T = {
   "viewLabel": "Learn more",
   "principlesEyebrow": "How we build", "principlesTitle": "A few principles, kept.",
   "closingEyebrow": "Get in touch", "closingTitle": "An idea, or a question?", "closingSub": "We'd love to hear from you.",
-  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta",
+  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "androidBeta": "Android beta",
   "aboutEyebrow": "The studio", "aboutTitle": "Just enough.",
   "aboutP1": "Kefafi is a small, independent software studio. We make calm tools for everyday personal life — software that does one thing well, then gets out of your way.",
   "aboutP2": "We build Arabic-first and offline-where-we-can. Your data stays yours. Our interfaces are warm, single-accent, and quiet.",
@@ -167,7 +169,45 @@ MAIL_SVG = ('<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke=
 GH_SVG = ('<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" '
           'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>')
 
+APPLE_SVG = ('<svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+             '<path d="M16.365 1.43c0 1.14-.417 2.06-1.2 2.79-.94.87-2.03 1.37-3.06 1.28-.13-1.03.4-2.11 '
+             '1.1-2.8.78-.76 2.1-1.34 3.16-1.27zM20.9 17.14c-.54 1.25-.8 1.8-1.5 2.9-.98 1.55-2.36 3.48-4.07 '
+             '3.49-1.52.01-1.9-.99-3.97-.98-2.07.01-2.5.99-4.02.97-1.71-.02-3.02-1.76-4-3.31-2.74-4.35-3.03-9.45-'
+             '1.34-12.16 1.2-1.93 3.1-3.06 4.88-3.06 1.82 0 2.96 1 4.46 1 1.46 0 2.35-1 4.46-1 1.6 0 3.29.87 4.5 '
+             '2.38-3.96 2.17-3.32 7.82.6 9.75z"/></svg>')
+GPLAY_SVG = ('<svg width="18" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+             '<path d="M3.6 2.3c-.2.2-.3.5-.3.9v17.6c0 .4.1.7.3.9l9.2-9.7L3.6 2.3zm11 8.4 2.7-2.9-11-6.2 8.3 9.1zm0 '
+             '2.6-8.3 9.1 11-6.2-2.7-2.9zm5-2.9-2.3-1.3-3 3.2 3 3.2 2.3-1.3c1-.6 1-2.9 0-3.5z"/></svg>')
+PUZZLE_SVG = ('<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+              'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+              '<path d="M4 7.5h3.2a2 2 0 1 1 3.6 0H14v3.2a2 2 0 1 1 0 3.6V17h-3.2a2 2 0 1 0-3.6 0H4v-3.2a2 2 0 1 0 0-3.6V7.5Z"/></svg>')
+
+# Store badge metadata: kind -> icon + a two-line label (small line localized, brand line kept Latin).
+STORE_META = {
+    "appstore": {"icon": APPLE_SVG, "lg": "App Store",
+                 "sm": {"ar": "حمِّله من", "en": "Download on the"}},
+    "play":     {"icon": GPLAY_SVG, "lg": "Google Play",
+                 "sm": {"ar": "احصل عليه من", "en": "Get it on"}},
+    "chrome":   {"icon": PUZZLE_SVG, "lg": "Chrome Web Store",
+                 "sm": {"ar": "أضِفه من", "en": "Available in the"}},
+    "web":      {"icon": GLOBE_SVG, "lg": "Web app",
+                 "sm": {"ar": "افتحه على", "en": "Open the"}},
+}
+
 def e(s): return html.escape(s, quote=False)
+
+def store_buttons(p, lang):
+    if not p.get("stores"):
+        return ""
+    out = []
+    for s in p["stores"]:
+        m = STORE_META[s["kind"]]
+        out.append(
+            f'<a class="store-btn" href="{s["url"]}" target="_blank" rel="noopener">'
+            f'<span class="store-btn__icon">{m["icon"]}</span>'
+            f'<span class="store-btn__txt"><span class="store-btn__sm">{e(m["sm"][lang])}</span>'
+            f'<span class="store-btn__lg" dir="ltr">{e(m["lg"])}</span></span></a>')
+    return '<div class="store-btns">\n          ' + "\n          ".join(out) + '\n        </div>'
 
 def base(lang): return "/en" if lang == "en" else ""
 def alt(lang): return "en" if lang == "ar" else "ar"
@@ -386,7 +426,6 @@ def page_product(lang, p):
             <span class="mono-tile {tile_cls(o['tile'])} mono-tile--sm">{o['mono']}</span>
             <span>{e(o['name'])}</span>
           </a>""" for o in others)
-    privacy_link = ""
     legal_row = ""
     if pid == "nasab":
         legal_row = (f'\n        <p class="legal-links">'
@@ -395,15 +434,29 @@ def page_product(lang, p):
                      f'<a href="{b}/nasab/terms/">{e(t["termsLabel"])}</a>'
                      f'<span class="sep">&middot;</span>'
                      f'<a href="{b}/nasab/support/">{e(t["supportLabel"])}</a></p>')
-    elif p.get("privacy"):
-        privacy_link = f'\n            <a class="btn btn--ghost" href="/{pid}/privacy/">{e(t["privacyLabel"])}</a>'
-    if p.get("android"):  # beta available → lead with "Try the beta"
-        cta_buttons = (f'<a class="btn btn--primary" href="{b}/{pid}/test/">{e(t["tryBeta"])}</a>\n'
-                       f'          <a class="btn btn--ghost" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
-                       f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>')
+    if p.get("stores"):  # publicly available -> download badges primary; beta (if any) secondary
+        sec = []
+        if p.get("android"):
+            sec.append(f'<a href="{b}/{pid}/test/">{e(t["androidBeta"])}</a>')
+        if p.get("privacy"):
+            sec.append(f'<a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a>')
+        sec.append(f'<a href="{b}/contact/">{e(t["navContact"])}</a>')
+        sec.append(f'<a href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>')
+        secondary = '<p class="cta-secondary">' + '<span class="sep">&middot;</span>'.join(sec) + '</p>'
+        cta_block = (f'        <p class="eyebrow" style="margin:24px 0 10px;">{e(t["getApp"])}</p>\n'
+                     f'        {store_buttons(p, lang)}\n'
+                     f'        {secondary}')
+    elif p.get("android"):  # closed beta -> "Join the beta" primary
+        cta_block = (f'        <div class="btn-row">\n'
+                     f'          <a class="btn btn--primary" href="{b}/{pid}/test/">{e(t["tryBeta"])}</a>\n'
+                     f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>\n'
+                     f'          <a class="btn btn--ghost" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
+                     f'        </div>{legal_row}')
     else:
-        cta_buttons = (f'<a class="btn btn--primary" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
-                       f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>')
+        cta_block = (f'        <div class="btn-row">\n'
+                     f'          <a class="btn btn--primary" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
+                     f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>\n'
+                     f'        </div>')
     title = f"{p['name']} — {p['tagline'][lang]}"
     desc = p["line"][lang]
     return head(lang, title, desc, canonical, alt_url, extra=f"/{pid}/favicon.svg") + header(lang, None, alt_url) + f"""  <main class="wrap">
@@ -416,9 +469,7 @@ def page_product(lang, p):
         <p class="prod-hero__tagline">{e(p['tagline'][lang])}</p>
         <p class="prod-hero__intro">{e(p['intro'][lang])}</p>
         <div class="badges">{badges}</div>
-        <div class="btn-row">
-          {cta_buttons}{privacy_link}
-        </div>{legal_row}
+{cta_block}
       </div>
     </section>
 
@@ -1053,7 +1104,6 @@ def page_test(lang, p):
       <div class="btn-row" style="margin-bottom:8px;">
         <a class="btn btn--primary btn--lg" href="{request}">{e(C['request'])}</a>
         <a class="btn btn--outline" href="{optin}" target="_blank" rel="noopener">{e(C['join'])}</a>
-        <a class="btn btn--ghost" href="{listing}" target="_blank" rel="noopener">{e(C['open'])}</a>
       </div>
       <h2>{e(C['how'])}</h2>
       <p>{e(C['howintro'])}</p>
