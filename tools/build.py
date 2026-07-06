@@ -109,7 +109,7 @@ T = {
   "viewLabel": "اعرف أكثر",
   "principlesEyebrow": "كيف نبني", "principlesTitle": "مبادئ قليلة، نلتزم بها.",
   "closingEyebrow": "تواصل", "closingTitle": "فكرةٌ، أو سؤال؟", "closingSub": "نحب أن نسمع منك.",
-  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "androidBeta": "نسخة أندرويد التجريبية",
+  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "androidBeta": "نسخة أندرويد التجريبية", "betaTag": "تجريبي", "soonTag": "قريباً",
   "aboutEyebrow": "الاستوديو", "aboutTitle": "ما يكفي فقط.",
   "aboutP1": "كفافي استوديو برمجيات مستقل صغير. نصنع أدوات هادئة للحياة اليومية — أداةٌ تفعل شيئاً واحداً جيداً، ثم تبتعد عن طريقك.",
   "aboutP2": "نبني بلغةٍ عربية أولاً، ودون اتصال حيثما أمكن. بياناتك تبقى معك. واجهاتنا دافئة، بلونٍ واحد، بلا ضجيج.",
@@ -130,7 +130,7 @@ T = {
   "viewLabel": "Learn more",
   "principlesEyebrow": "How we build", "principlesTitle": "A few principles, kept.",
   "closingEyebrow": "Get in touch", "closingTitle": "An idea, or a question?", "closingSub": "We'd love to hear from you.",
-  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "androidBeta": "Android beta",
+  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "androidBeta": "Android beta", "betaTag": "Beta", "soonTag": "Soon",
   "aboutEyebrow": "The studio", "aboutTitle": "Just enough.",
   "aboutP1": "Kefafi is a small, independent software studio. We make calm tools for everyday personal life — software that does one thing well, then gets out of your way.",
   "aboutP2": "We build Arabic-first and offline-where-we-can. Your data stays yours. Our interfaces are warm, single-accent, and quiet.",
@@ -184,15 +184,30 @@ PUZZLE_SVG = ('<svg width="19" height="19" viewBox="0 0 24 24" fill="none" strok
 
 # Store badge metadata: kind -> icon + a two-line label (small line localized, brand line kept Latin).
 STORE_META = {
-    "appstore": {"icon": APPLE_SVG, "lg": "App Store",
+    "appstore": {"icon": APPLE_SVG, "lg": "App Store", "short": "App Store",
                  "sm": {"ar": "حمِّله من", "en": "Download on the"}},
-    "play":     {"icon": GPLAY_SVG, "lg": "Google Play",
+    "play":     {"icon": GPLAY_SVG, "lg": "Google Play", "short": "Google Play",
                  "sm": {"ar": "احصل عليه من", "en": "Get it on"}},
-    "chrome":   {"icon": PUZZLE_SVG, "lg": "Chrome Web Store",
+    "chrome":   {"icon": PUZZLE_SVG, "lg": "Chrome Web Store", "short": "Chrome",
                  "sm": {"ar": "أضِفه من", "en": "Available in the"}},
-    "web":      {"icon": GLOBE_SVG, "lg": "Web app",
+    "web":      {"icon": GLOBE_SVG, "lg": "Web app", "short": "Web",
                  "sm": {"ar": "افتحه على", "en": "Open the"}},
 }
+
+def card_stores(p, lang):
+    """Small availability hints on the home-page product cards (non-interactive)."""
+    chips = []
+    if p.get("stores"):
+        for s in p["stores"]:
+            m = STORE_META[s["kind"]]
+            chips.append(f'<span class="store-chip">{m["icon"]}{e(m["short"])}</span>')
+        if p.get("android"):
+            chips.append(f'<span class="store-chip store-chip--beta">{e(T[lang]["betaTag"])}</span>')
+    elif p.get("android"):
+        chips.append(f'<span class="store-chip store-chip--beta">{e(T[lang]["betaTag"])}</span>')
+    else:
+        chips.append(f'<span class="store-chip store-chip--soon">{e(T[lang]["soonTag"])}</span>')
+    return '<div class="card__stores">' + "".join(chips) + '</div>'
 
 def e(s): return html.escape(s, quote=False)
 
@@ -346,6 +361,7 @@ def page_home(lang):
             <div class="card__body">
               <div class="card__title"><span class="card__name">{e(p['name'])}</span><span class="card__ar">{p['ar']}</span></div>
               <p class="card__desc">{e(p['line'][lang])}</p>
+              {card_stores(p, lang)}
               <span class="card__cta">{e(t['viewLabel'])}<span class="mono">{arrow(lang)}</span></span>
             </div>
           </div>
