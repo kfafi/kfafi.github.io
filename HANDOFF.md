@@ -15,13 +15,15 @@ Bilingual, **Arabic-first at the root**, English mirror under `/en/`.
 - **Products:** Nasab (نسب), Daftar (دفتر), Sayla (سيلة), Lumen (لومن).
 - **Pages:** home · Studio (`/about/`) · Contact (`/contact/`) · a page per product ·
   Nasab legal (`/nasab/privacy/`, `/nasab/terms/`, `/nasab/support/`, with `#delete`) ·
-  per-app beta pages (`/<app>/test/`) · Daftar & Sayla privacy (bilingual single files).
+  per-app beta pages (`/<app>/test/`) · Daftar & Sayla privacy (bilingual single files) ·
+  Nasab invite fallback (`/nasab/invite/`, noindex).
 - **Download / beta story (consistent end to end):**
-  - **Home cards** show availability hints — Nasab `Beta`, Daftar `App Store · Beta`,
-    Sayla `Chrome · Beta`, Lumen `Soon`.
+  - **Home cards** show availability hints — Nasab `App Store · Beta`,
+    Daftar `App Store · Beta`, Sayla `Chrome · Beta`, Lumen `Soon`.
   - **Product pages** show real store **download badges** for released apps
-    (Daftar → App Store, Sayla → Chrome Web Store) with a secondary "Android beta"
-    link; not-yet-public apps (Nasab) lead with **Join the beta**; Lumen leads with GitHub.
+    (Nasab → App Store, Daftar → App Store, Sayla → Chrome Web Store) with a
+    secondary "Android beta" link (Android still in Play closed testing for all
+    three); Lumen leads with GitHub.
   - **Beta pages** = "how to join the testing group" (Request to join → Join the test).
 - **Deep links:** `/.well-known/assetlinks.json` (Android App Links, Nasab) and
   `/.well-known/apple-app-site-association` (iOS Universal Links, Nasab).
@@ -64,10 +66,19 @@ Merging to `main` triggers the **"pages build and deployment"** workflow → liv
    GitHub caches that 404 for up to 10 min — so a page can 404 even after it
    publishes. Verify the **origin** with a cache-busting query, e.g.
    `curl "https://kefafi.dev/<path>/?cb=$RANDOM"`.
-3. **Cloudflare is in front.** A **Transform Rule** sets
-   `Content-Type: application/json` on `/.well-known/apple-app-site-association`
-   (GitHub Pages serves the extensionless file as `application/octet-stream`).
-   Do **not** cache-transform or redirect the two `.well-known` paths.
+3. **Cloudflare is in front** — two rules live in the Cloudflare dashboard
+   (Rules), NOT in this repo. Recreate them if the zone is ever rebuilt:
+   - **AASA content-type** — *Transform Rule → Modify Response Header*: set
+     `Content-Type: application/json` when `URI Path` equals
+     `/.well-known/apple-app-site-association`. GitHub Pages serves that
+     extensionless file as `application/octet-stream`; Apple wants JSON.
+   - **Nasab invite fallback** — *Rewrite URL rule* (wildcard): match Request URL
+     `https://kefafi.dev/nasab/invite/*`, rewrite **Path** target `/nasab/invite/*`
+     → `/nasab/invite/` (query left empty = preserved). This serves the static
+     `/nasab/invite/` landing page with **200** for any `/nasab/invite/<id>`
+     (GitHub Pages 404s arbitrary sub-paths, and its 404 page returns status 404).
+     It's a transparent rewrite, so the visitor URL keeps the id.
+   - Do **not** cache-transform or redirect the two `.well-known` paths.
 4. **`.nojekyll`** at the root must stay — it lets the `.well-known` dot-folder publish.
 
 ## Branch / merge workflow (important)
@@ -87,13 +98,14 @@ git push --force-with-lease -u origin claude/beautiful-mccarthy-5t83p3
 
 ## Open items / pending inputs
 
-- **Google Play** links for the public apps (Daftar / Sayla, and Nasab when live) →
-  add as `stores` kind `"play"`.
+- **Google Play** links for the public apps (Nasab / Daftar / Sayla) once the
+  Android builds leave closed testing → add as `stores` kind `"play"` (the badge
+  + card chip appear automatically).
 - **Sayla on iOS** — App Store link, if it ships there.
 - **Lumen** — Play package (to generate its beta page) and any store links; **Lumen
   still has no privacy policy** (needs authoring from its real data practices).
-- **Nasab** — production store links once public. Its privacy/terms were drafted from
-  the `family-tree` implementation; **have them legal-reviewed** before a wide release.
+- **Nasab** — its privacy/terms were drafted from the `family-tree` implementation;
+  **have them legal-reviewed**. (Nasab is now live on the App Store; Android beta.)
 - **Google Search Console** "Page with redirect" on `http://kefafi.dev/` is benign
   (http→https on the root); validate/ignore.
 
@@ -104,7 +116,7 @@ git push --force-with-lease -u origin claude/beautiful-mccarthy-5t83p3
 - Packages / store IDs:
   - Nasab — Android `dev.kefafi.family_tree`, iOS `dev.kefafi.familyTree`
     (AASA appID `X8YHXF2LK2.dev.kefafi.familyTree`, App Links SHA256 in
-    `.well-known/assetlinks.json`).
+    `.well-known/assetlinks.json`); **App Store `id6781679984`**.
   - Daftar — `dev.kefafi.daftar`; App Store `id6781765878`.
   - Sayla — **published** Android `com.kefafi.sayla` (the repo's internal
     `applicationId` is `com.kfafi.sharebullet`); Chrome Web Store extension
