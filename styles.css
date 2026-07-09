@@ -387,6 +387,13 @@ html[lang="ar"] .prose h1 { font-family: var(--font-arabic-display); }
 }
 .site-footer__bottom .mono { font-size: 11px; letter-spacing: 0.06em; }
 
+/* ---- Nasab invite fallback page ---- */
+.invite { text-align: center; padding-top: 24px; }
+.invite__tile { margin: 0 auto 22px; }
+.invite__lede { font-size: 19px; line-height: 1.7; color: var(--ink-700); max-width: 46ch; margin: 0 auto 26px; }
+.invite .store-btns { justify-content: center; }
+.invite .cta-secondary { justify-content: center; }
+
 /* ---- Home-card availability hints ---- */
 .card__stores { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
 .store-chip {
