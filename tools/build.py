@@ -33,7 +33,8 @@ PRODUCTS = [
         {"ar": "ثلاثة أجيال في لمحة واحدة.", "en": "Three generations at a glance."},
         {"ar": "تتحكّم بالمشاركة، وتسحبها متى شئت.", "en": "You control sharing — revocable anytime."},
         {"ar": "خصوصية محفوظة للأحياء.", "en": "Privacy for the living."},
-     ], "privacy": True, "android": "dev.kefafi.family_tree"},
+     ], "privacy": True, "android": "dev.kefafi.family_tree",
+     "stores": [{"kind": "appstore", "url": "https://apps.apple.com/us/app/%D9%86%D8%B3%D8%A8-nasab/id6781679984"}]},
     {"id": "daftar", "mono": "د", "tile": "clay", "name": "Daftar", "ar": "دفتر",
      "tagline": {"ar": "سجّل اللعب بلا ورقة.", "en": "Score the game, no paper."},
      "line": {"ar": "تتبّع نقاط الكنكان والبلوت. بديل الدفتر الورقي. دون اتصال، بلا حسابات.",
@@ -454,14 +455,14 @@ def page_product(lang, p):
         sec = []
         if p.get("android"):
             sec.append(f'<a href="{b}/{pid}/test/">{e(t["androidBeta"])}</a>')
-        if p.get("privacy"):
+        if p.get("privacy") and not legal_row:  # nasab's privacy is in legal_row already
             sec.append(f'<a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a>')
         sec.append(f'<a href="{b}/contact/">{e(t["navContact"])}</a>')
         sec.append(f'<a href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>')
         secondary = '<p class="cta-secondary">' + '<span class="sep">&middot;</span>'.join(sec) + '</p>'
         cta_block = (f'        <p class="eyebrow" style="margin:24px 0 10px;">{e(t["getApp"])}</p>\n'
                      f'        {store_buttons(p, lang)}\n'
-                     f'        {secondary}')
+                     f'        {secondary}{legal_row}')
     elif p.get("android"):  # closed beta -> "Join the beta" primary
         cta_block = (f'        <div class="btn-row">\n'
                      f'          <a class="btn btn--primary" href="{b}/{pid}/test/">{e(t["tryBeta"])}</a>\n'
@@ -1132,6 +1133,41 @@ def page_test(lang, p):
   </main>
 """ + footer(lang)
 
+# ---------------------------------------------------------------- Nasab invite fallback
+# Static, generic landing for /nasab/invite/ (+ /nasab/invite/<id> via a Cloudflare
+# rewrite). Devices with the app open invite links directly via .well-known.
+def page_invite(lang):
+    p = by_id("nasab"); b = base(lang)
+    alt_url = {"ar": "/nasab/invite/", "en": "/en/nasab/invite/"}
+    canonical = DOMAIN + b + "/nasab/invite/"
+    C = {
+      "ar": {
+        "title": "دعوة إلى شجرة عائلة — نسب",
+        "desc": "لقد دُعيت إلى شجرة عائلة على تطبيق نسب. حمّل التطبيق وسجّل الدخول بالبريد نفسه لتُربط بالشجرة.",
+        "eyebrow": "دعوة", "h1": "لقد دُعيت إلى شجرة عائلة",
+        "body": "لقد دُعيت للانضمام إلى شجرة عائلة على تطبيق نسب. حمّل التطبيق، ثم سجّل الدخول بنفس البريد الإلكتروني الذي وصلتك الدعوة عليه لتُربط بالشجرة تلقائيًا.",
+        "androidBeta": "نسخة أندرويد التجريبية", "about": "عن نسب",
+      },
+      "en": {
+        "title": "You've been invited — Nasab",
+        "desc": "You've been invited to a family tree on Nasab. Get the app and sign in with the same email to be linked.",
+        "eyebrow": "Invitation", "h1": "You've been invited",
+        "body": "You've been invited to a family tree on Nasab. Get the app, then sign in with the same email the invite was sent to — you'll be linked to the tree automatically.",
+        "androidBeta": "Android beta", "about": "About Nasab",
+      },
+    }[lang]
+    return head(lang, C["title"], C["desc"], canonical, alt_url, extra="/nasab/favicon.svg", noindex=True) + header(lang, None, alt_url) + f"""  <main class="wrap section">
+    <div class="text-col invite">
+      <span class="mono-tile mono-tile--ink mono-tile--xl invite__tile">{p['mono']}</span>
+      <p class="eyebrow">{e(C['eyebrow'])}</p>
+      <h1 class="display" style="font-size:clamp(30px,5vw,44px);margin:0 0 18px;">{e(C['h1'])}</h1>
+      <p class="invite__lede">{e(C['body'])}</p>
+      {store_buttons(p, lang)}
+      <p class="cta-secondary"><a href="{b}/nasab/test/">{e(C['androidBeta'])}</a><span class="sep">&middot;</span><a href="{b}/nasab/">{e(C['about'])}</a></p>
+    </div>
+  </main>
+""" + footer(lang)
+
 # ---------------------------------------------------------------- favicons
 def favicon(mono, tile):
     bg = "#1C1815" if tile == "ink" else "#C0502A"
@@ -1191,6 +1227,8 @@ for lang in ("ar", "en"):
     for p in PRODUCTS:
         if p.get("android"):
             write(pref + p["id"] + "/test/index.html", page_test(lang, p))
+    # Nasab invite fallback (noindex; served for /nasab/invite/* via a Cloudflare rewrite).
+    write(pref + "nasab/invite/index.html", page_invite(lang))
 
 write("nasab/favicon.svg", favicon("ن", "ink"))
 write("lumen/favicon.svg", favicon("ل", "ink"))
