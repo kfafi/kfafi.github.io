@@ -1081,11 +1081,12 @@ def page_test(lang, p):
         "how": "كيف تنضمّ إلى مجموعة الاختبار",
         "howintro": "الاختبار مغلق، لذا نضيف بريدك يدوياً أولاً. ثلاث خطوات:",
         "steps": [
-          "أرسل لنا بريد حساب Google الذي تستخدمه على متجر Play — عبر زر «اطلب الانضمام» أدناه — لنضيفك إلى قائمة المختبِرين.",
-          "بعد أن نؤكّد إضافتك، افتح «انضمّ للاختبار» وسجّل الدخول بالبريد نفسه، ثم اقبل الدعوة.",
+          "أرسل لنا بريد حساب Google الذي تستخدمه على متجر Play — عبر زر «اطلب الانضمام» أعلاه — لنضيفك إلى قائمة المختبِرين.",
+          "بعد أن نؤكّد إضافتك، اضغط زر «Google Play» أعلاه وسجّل الدخول بالبريد نفسه، ثم اقبل الدعوة.",
           f"عُد إلى Google Play وثبّت {p['ar']}.",
         ],
-        "request": "اطلب الانضمام", "join": "انضمّ للاختبار", "open": "افتح في Google Play",
+        "request": "اطلب الانضمام", "joinvia": "انضمّ للاختبار على",
+        "openlisting": "هل أنت مختبِر بالفعل؟ افتح في متجر Play",
         "note": "بعد إضافة بريدك وقبولك الدعوة، قد يستغرق ظهور التطبيق في المتجر بضع دقائق.",
         "contacth": "للمساعدة",
         "contact": 'لأي سؤال، راسلنا على <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.',
@@ -1100,11 +1101,12 @@ def page_test(lang, p):
         "how": "How to join the testing group",
         "howintro": "The test is closed, so we add your email first. Three steps:",
         "steps": [
-          "Send us the Google account you use on the Play Store — via the “Request to join” button below — so we can add you to the tester list.",
-          "Once we confirm you're added, open “Join the test,” sign in with that same email, and accept the invitation.",
+          "Send us the Google account you use on the Play Store — via the “Request to join” button above — so we can add you to the tester list.",
+          "Once we confirm you're added, tap the Google Play button above, sign in with that same email, and accept the invitation.",
           f"Return to Google Play and install {p['name']}.",
         ],
-        "request": "Request to join", "join": "Join the test", "open": "Open in Google Play",
+        "request": "Request to join", "joinvia": "Join the test on",
+        "openlisting": "Already a tester? Open in Play Store",
         "note": "After your email is added and you accept, it can take a few minutes for the app to appear in the store.",
         "contacth": "Need help",
         "contact": 'For any question, email <a href="mailto:support@kefafi.dev">support@kefafi.dev</a>.',
@@ -1112,16 +1114,23 @@ def page_test(lang, p):
       },
     }[lang]
     steps = "".join(f"\n        <li>{e(s)}</li>" for s in C["steps"])
+    m = STORE_META["play"]
+    play_badge = ('<div class="store-btns">\n          '
+        f'<a class="store-btn" href="{optin}" target="_blank" rel="noopener">'
+        f'<span class="store-btn__icon">{m["icon"]}</span>'
+        f'<span class="store-btn__txt"><span class="store-btn__sm">{e(C["joinvia"])}</span>'
+        '<span class="store-btn__lg" dir="ltr">Google Play</span></span></a>\n        </div>')
     return head(lang, C["title"], C["desc"], canonical, alt_url, extra=f"/{pid}/favicon.svg") + header(lang, None, alt_url) + f"""  <main class="wrap">
     <a class="back-link" href="{b}/{pid}/"><span class="mono">{back_arrow(lang)}</span>{e(C['back'])}</a>
     <div class="prose text-col">
       <p class="eyebrow">{e(C['eyebrow'])}</p>
       <h1>{e(C['h1'])}</h1>
       <p>{e(C['intro'])}</p>
-      <div class="btn-row" style="margin-bottom:8px;">
-        <a class="btn btn--primary btn--lg" href="{request}">{e(C['request'])}</a>
-        <a class="btn btn--outline" href="{optin}" target="_blank" rel="noopener">{e(C['join'])}</a>
+      {play_badge}
+      <div class="btn-row" style="margin:16px 0 2px;">
+        <a class="btn btn--outline" href="{request}">{e(C['request'])}</a>
       </div>
+      <p class="cta-secondary"><a href="{listing}" target="_blank" rel="noopener">{e(C['openlisting'])}</a></p>
       <h2>{e(C['how'])}</h2>
       <p>{e(C['howintro'])}</p>
       <ol>{steps}
