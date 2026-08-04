@@ -78,9 +78,9 @@ PRODUCTS = [
     {"id": "thikrayat", "mono": "ذ", "tile": "clay", "name": "Thikrayat", "ar": "ذكريات",
      "tagline": {"ar": "ذكرياتك، تعود إلى جهازك.",
                  "en": "Your memories, back on your phone."},
-     "line": {"ar": "حوّل نسخة بياناتك من سناب‌شات إلى صور ومقاطع حقيقية — بتواريخها وأماكنها الأصلية. على جهازك، بلا حساب.",
+     "line": {"ar": "حوّل نسخة بياناتك من سناب شات إلى صور ومقاطع حقيقية — بتواريخها وأماكنها الأصلية. على جهازك، بلا حساب.",
               "en": "Turn your Snapchat data export into real photos and videos — with their original dates and places. On your device, no account."},
-     "intro": {"ar": "ذكريات تحوّل نسخة بياناتك من سناب‌شات إلى صور ومقاطع حقيقية على جهازك — كلٌّ منها بتاريخ التقاطها، ومكانها متى سجّلته نسختك، وتُجمع في ألبوم واحد. كل شيء يجري على هاتفك: بلا حساب، بلا خادم، ولا يُرفع شيء. غير مرتبطة بشركة سناب.",
+     "intro": {"ar": "ذكريات تحوّل نسخة بياناتك من سناب شات إلى صور ومقاطع حقيقية على جهازك — كلٌّ منها بتاريخ التقاطها، ومكانها متى سجّلته نسختك، وتُجمع في ألبوم واحد. كل شيء يجري على هاتفك: بلا حساب، بلا خادم، ولا يُرفع شيء. غير مرتبطة بشركة سناب.",
                "en": "Thikrayat turns your Snapchat “Download My Data” export into real photos and videos on your device — each restored with the day it was taken, the place where your export recorded it, and gathered into one album. Everything happens on your phone: no account, no server, nothing uploaded. Not affiliated with Snap Inc."},
      "platforms": ["Flutter", "iOS", "Android"],
      "features": [
