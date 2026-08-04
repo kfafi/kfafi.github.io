@@ -1256,5 +1256,6 @@ for lang in ("ar", "en"):
 write("nasab/favicon.svg", favicon("ن", "ink"))
 write("lumen/favicon.svg", favicon("ل", "ink"))
 write("sayla/favicon.svg", favicon("س", "clay"))
+write("thikrayat/favicon.svg", favicon("ذ", "clay"))
 write("sitemap.xml", sitemap())
 print("done")
