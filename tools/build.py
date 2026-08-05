@@ -89,20 +89,20 @@ PRODUCTS = [
         {"ar": "كل شيء على جهازك — بلا حساب، بلا خادم.", "en": "Everything on your device — no account, no server."},
         {"ar": "تُجمع في ألبوم واحد، بترتيب التاريخ.", "en": "Gathered into one album, in date order."},
      ], "privacy": True, "icon": True},
-    {"id": "table-manager", "mono": "ج", "tile": "ink", "name": "Table Manager", "ar": "جداول",
+    {"id": "table-manager", "mono": "ج", "tile": "ink", "name": "Jadawil", "ar": "جداول",
      "tagline": {"ar": "حرِّر جداولك بلا SQL.",
                  "en": "Edit your tables, no SQL."},
      "line": {"ar": "حرِّر جداول SQL Server واستكشفها من المتصفّح — دون كتابة SQL. مُستضاف على شبكتك.",
               "en": "Edit and explore SQL Server tables from the browser — no SQL. Self-hosted on your network."},
      "intro": {"ar": "جداول تمنح فريقك طريقةً بسيطة كجدول البيانات لتحرير جداول قاعدة SQL Server واستكشافها — دون كتابة SQL. مُستضاف ذاتيًا: يعمل على جهازك ويتّصل بقاعدتك، فلا تغادر بياناتك شبكتك ولا يمرّ شيء عبر كفافي.",
-               "en": "Table Manager gives your team a clean, spreadsheet-like way to edit and explore the tables in a SQL Server database — without writing SQL. It's self-hosted: it runs on your own machine and talks to your own database, so your data never leaves your network and nothing passes through Kefafi."},
+               "en": "Jadawil gives your team a clean, spreadsheet-like way to edit and explore the tables in a SQL Server database — without writing SQL. It's self-hosted: it runs on your own machine and talks to your own database, so your data never leaves your network and nothing passes through Kefafi."},
      "platforms": ["SQL Server", "Self-hosted", "Web"],
      "features": [
         {"ar": "حرِّر وصفِّ واستورد وصدّر في شبكة تشبه الجداول.", "en": "Edit, filter, import and export in a familiar grid."},
         {"ar": "تبقى على شبكتك — لا خادم يرى بياناتك.", "en": "Stays on your network — no server sees your data."},
         {"ar": "أدوار، وصلاحيات لكل جدول ولكل اتصال.", "en": "Roles, and per-table, per-connection permissions."},
         {"ar": "كل تغيير مُسجَّل، مع نسخ احتياطية.", "en": "Every change logged, with backups."},
-     ], "selfhosted": True},
+     ], "selfhosted": True, "privacy": True, "segment": {"ar": "للفرق", "en": "For teams"}},
 ]
 
 PRINCIPLES = [
@@ -138,7 +138,7 @@ T = {
   "viewLabel": "اعرف أكثر",
   "principlesEyebrow": "كيف نبني", "principlesTitle": "مبادئ قليلة، نلتزم بها.",
   "closingEyebrow": "تواصل", "closingTitle": "فكرةٌ، أو سؤال؟", "closingSub": "نحب أن نسمع منك.",
-  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من ست، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "androidBeta": "نسخة أندرويد التجريبية", "betaTag": "تجريبي", "soonTag": "قريباً", "availableTag": "متاح",
+  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من ست، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "getAccess": "اطلب الوصول", "androidBeta": "نسخة أندرويد التجريبية", "betaTag": "تجريبي", "soonTag": "قريباً", "availableTag": "متاح",
   "aboutEyebrow": "الاستوديو", "aboutTitle": "ما يكفي فقط.",
   "aboutP1": "كفافي استوديو برمجيات مستقل صغير. نصنع أدوات هادئة للحياة اليومية — أداةٌ تفعل شيئاً واحداً جيداً، ثم تبتعد عن طريقك.",
   "aboutP2": "نبني بلغةٍ عربية أولاً، ودون اتصال حيثما أمكن. بياناتك تبقى معك. واجهاتنا دافئة، بلونٍ واحد، بلا ضجيج.",
@@ -159,7 +159,7 @@ T = {
   "viewLabel": "Learn more",
   "principlesEyebrow": "How we build", "principlesTitle": "A few principles, kept.",
   "closingEyebrow": "Get in touch", "closingTitle": "An idea, or a question?", "closingSub": "We'd love to hear from you.",
-  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of six tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "androidBeta": "Android beta", "betaTag": "Beta", "soonTag": "Soon", "availableTag": "Available",
+  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of six tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "getAccess": "Request access", "androidBeta": "Android beta", "betaTag": "Beta", "soonTag": "Soon", "availableTag": "Available",
   "aboutEyebrow": "The studio", "aboutTitle": "Just enough.",
   "aboutP1": "Kefafi is a small, independent software studio. We make calm tools for everyday personal life — software that does one thing well, then gets out of your way.",
   "aboutP2": "We build Arabic-first and offline-where-we-can. Your data stays yours. Our interfaces are warm, single-accent, and quiet.",
@@ -272,6 +272,11 @@ def tile_html(p, size):
                 f'<img class="mono-tile__img" src="/{p["id"]}/icon.svg" alt="" aria-hidden="true"></span>')
     return f'<span class="mono-tile {tile_cls(p["tile"])} mono-tile--{size}">{p["mono"]}</span>'
 
+def seg_tag(p, lang):
+    """Small audience tag (e.g. 'For teams') for products aimed at a different segment."""
+    s = p.get("segment")
+    return f'<span class="seg-tag">{e(s[lang])}</span>' if s else ''
+
 # ---------------------------------------------------------------- chrome
 def head(lang, title, desc, canonical, alt_url, extra="", noindex=False):
     dirr = "rtl" if lang == "ar" else "ltr"
@@ -364,6 +369,7 @@ def footer(lang):
               <a href="/daftar/privacy/">Daftar {e(t['privacyLabel'])}</a>
               <a href="/sayla/privacy/">Sayla {e(t['privacyLabel'])}</a>
               <a href="/thikrayat/privacy/">Thikrayat {e(t['privacyLabel'])}</a>
+              <a href="/table-manager/privacy/">Jadawil {e(t['privacyLabel'])}</a>
             </div>
           </div>
         </div>
@@ -398,7 +404,7 @@ def page_home(lang):
           <div class="card__row">
             {tile_html(p, 'md')}
             <div class="card__body">
-              <div class="card__title"><span class="card__name">{e(p['name'])}</span><span class="card__ar">{p['ar']}</span></div>
+              <div class="card__title"><span class="card__name">{e(p['name'])}</span><span class="card__ar">{p['ar']}</span>{seg_tag(p, lang)}</div>
               <p class="card__desc">{e(p['line'][lang])}</p>
               {card_stores(p, lang)}
               <span class="card__cta">{e(t['viewLabel'])}<span class="mono">{arrow(lang)}</span></span>
@@ -511,7 +517,8 @@ def page_product(lang, p):
         priv = (f'\n        <p class="cta-secondary"><a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a></p>'
                 if p.get("privacy") else '')
         cta_block = (f'        <div class="btn-row">\n'
-                     f'          <a class="btn btn--primary" href="{b}/contact/">{e(t["navContact"])}</a>\n'
+                     f'          <a class="btn btn--primary" href="{b}/contact/">{e(t["getAccess"])}</a>\n'
+                     f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>\n'
                      f'        </div>{priv}')
     else:
         priv = (f'\n        <p class="cta-secondary"><a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a></p>'
@@ -528,7 +535,7 @@ def page_product(lang, p):
     <section class="prod-hero">
       {tile_html(p, 'xl')}
       <div class="prod-hero__body">
-        <div class="prod-hero__title"><h1>{e(p['name'])}</h1><span class="ar">{p['ar']}</span></div>
+        <div class="prod-hero__title"><h1>{e(p['name'])}</h1><span class="ar">{p['ar']}</span>{seg_tag(p, lang)}</div>
         <p class="prod-hero__tagline">{e(p['tagline'][lang])}</p>
         <p class="prod-hero__intro">{e(p['intro'][lang])}</p>
         <div class="badges">{badges}</div>
@@ -1282,6 +1289,7 @@ def sitemap():
     add(DOMAIN + "/daftar/privacy/", "yearly", "0.4")
     add(DOMAIN + "/sayla/privacy/", "yearly", "0.4")
     add(DOMAIN + "/thikrayat/privacy/", "yearly", "0.4")
+    add(DOMAIN + "/table-manager/privacy/", "yearly", "0.4")
     body = "\n".join(urls)
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
