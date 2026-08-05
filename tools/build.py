@@ -88,7 +88,7 @@ PRODUCTS = [
         {"ar": "الأماكن تُعاد حيثما سجّلتها نسختك.", "en": "Places written back where your export has them."},
         {"ar": "كل شيء على جهازك — بلا حساب، بلا خادم.", "en": "Everything on your device — no account, no server."},
         {"ar": "تُجمع في ألبوم واحد، بترتيب التاريخ.", "en": "Gathered into one album, in date order."},
-     ], "privacy": True},
+     ], "privacy": True, "icon": True},
 ]
 
 PRINCIPLES = [
@@ -249,6 +249,13 @@ def by_id(pid): return next(p for p in PRODUCTS if p["id"] == pid)
 
 def tile_cls(tile): return "mono-tile--ink" if tile == "ink" else "mono-tile--clay"
 
+def tile_html(p, size):
+    """A product tile: the real icon image when the product ships one, else the letter monogram."""
+    if p.get("icon"):
+        return (f'<span class="mono-tile mono-tile--img mono-tile--{size}">'
+                f'<img class="mono-tile__img" src="/{p["id"]}/icon.svg" alt="" aria-hidden="true"></span>')
+    return f'<span class="mono-tile {tile_cls(p["tile"])} mono-tile--{size}">{p["mono"]}</span>'
+
 # ---------------------------------------------------------------- chrome
 def head(lang, title, desc, canonical, alt_url, extra="", noindex=False):
     dirr = "rtl" if lang == "ar" else "ltr"
@@ -368,12 +375,12 @@ def page_home(lang):
     alt_url = {"ar": "/", "en": "/en/"}
     canonical = DOMAIN + (b + "/")
     tiles = "".join(f"""        <a class="tile" href="{prod_url(lang, p['id'])}">
-          <span class="mono-tile {tile_cls(p['tile'])} mono-tile--lg">{p['mono']}</span>
+          {tile_html(p, 'lg')}
           <span class="tile__name">{e(p['name'])}</span>
         </a>""" for p in PRODUCTS)
     cards = "".join(f"""        <a class="card" href="{prod_url(lang, p['id'])}">
           <div class="card__row">
-            <span class="mono-tile {tile_cls(p['tile'])} mono-tile--md">{p['mono']}</span>
+            {tile_html(p, 'md')}
             <div class="card__body">
               <div class="card__title"><span class="card__name">{e(p['name'])}</span><span class="card__ar">{p['ar']}</span></div>
               <p class="card__desc">{e(p['line'][lang])}</p>
@@ -455,7 +462,7 @@ def page_product(lang, p):
         </div>""" for f in p["features"])
     others = [o for o in PRODUCTS if o["id"] != pid]
     chips = "".join(f"""          <a class="chip" href="{prod_url(lang, o['id'])}">
-            <span class="mono-tile {tile_cls(o['tile'])} mono-tile--sm">{o['mono']}</span>
+            {tile_html(o, 'sm')}
             <span>{e(o['name'])}</span>
           </a>""" for o in others)
     legal_row = ""
@@ -497,7 +504,7 @@ def page_product(lang, p):
     <a class="back-link" href="{b}/#products"><span class="mono">{back_arrow(lang)}</span>{e(t['backLabel'])}</a>
 
     <section class="prod-hero">
-      <span class="mono-tile {tile_cls(p['tile'])} mono-tile--xl">{p['mono']}</span>
+      {tile_html(p, 'xl')}
       <div class="prod-hero__body">
         <div class="prod-hero__title"><h1>{e(p['name'])}</h1><span class="ar">{p['ar']}</span></div>
         <p class="prod-hero__tagline">{e(p['tagline'][lang])}</p>
@@ -1206,6 +1213,26 @@ def favicon(mono, tile, label):
 </svg>
 """
 
+# Thikrayat "Collected moments" icon — Direction A from the identity proposal:
+# two overlapping photo cards + an ochre ذ-dot (the "moment") on a clay→terracotta
+# gradient. The square variant (no corner radius) feeds the CSS tiles, which round
+# it per size; the rounded variant is the standalone browser-tab favicon.
+PRODUCT_ICON_ART = {
+    "thikrayat": (
+        '<rect x="46" y="52" width="78" height="72" rx="11" fill="#E7D8C2" transform="rotate(-8 85 88)"/>'
+        '<rect x="52" y="58" width="78" height="72" rx="11" fill="#FBF5EC"/>'
+        '<path d="M62 108 q29 -16 58 0" stroke="#C9A98A" stroke-width="4" fill="none" stroke-linecap="round"/>'
+        '<circle cx="104" cy="82" r="8.5" fill="#E0A756"/>'
+    ),
+}
+def product_icon_svg(pid, name, rounded):
+    rx = ' rx="37"' if rounded else ''
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 168" role="img" aria-label="{name}">\n'
+            f'  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">'
+            f'<stop offset="0" stop-color="#A9663F"/><stop offset="1" stop-color="#7A5C3E"/></linearGradient></defs>\n'
+            f'  <rect width="168" height="168"{rx} fill="url(#g)"/>\n'
+            f'  {PRODUCT_ICON_ART[pid]}\n</svg>\n')
+
 # ---------------------------------------------------------------- sitemap
 def sitemap():
     urls = []
@@ -1259,7 +1286,12 @@ for lang in ("ar", "en"):
 
 # One favicon per product, generated from its own tile + mono glyph, so a new
 # product entry automatically gets its icon (no hand-maintained list to forget).
+# Products that ship a real icon (p["icon"]) use it for the favicon + on-page tiles.
 for _p in PRODUCTS:
-    write(_p["id"] + "/favicon.svg", favicon(_p["mono"], _p["tile"], _p["name"]))
+    if _p.get("icon"):
+        write(_p["id"] + "/favicon.svg", product_icon_svg(_p["id"], _p["name"], rounded=True))
+        write(_p["id"] + "/icon.svg", product_icon_svg(_p["id"], _p["name"], rounded=False))
+    else:
+        write(_p["id"] + "/favicon.svg", favicon(_p["mono"], _p["tile"], _p["name"]))
 write("sitemap.xml", sitemap())
 print("done")

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 168" role="img" aria-label="Thikrayat">
   <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9663F"/><stop offset="1" stop-color="#7A5C3E"/></linearGradient></defs>
-  <rect width="168" height="168" rx="37" fill="url(#g)"/>
+  <rect width="168" height="168" fill="url(#g)"/>
   <rect x="46" y="52" width="78" height="72" rx="11" fill="#E7D8C2" transform="rotate(-8 85 88)"/><rect x="52" y="58" width="78" height="72" rx="11" fill="#FBF5EC"/><path d="M62 108 q29 -16 58 0" stroke="#C9A98A" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="104" cy="82" r="8.5" fill="#E0A756"/>
 </svg>
