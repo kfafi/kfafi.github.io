@@ -239,6 +239,9 @@ html[lang="ar"] .display { font-family: var(--font-arabic-display); font-weight:
 }
 .mono-tile--clay { background: var(--clay-500); color: var(--text-on-clay); }
 .mono-tile--ink { background: var(--ink-900); color: var(--paper); }
+/* real product icon: the SVG fills the tile; the size class's radius clips it */
+.mono-tile--img { overflow: hidden; }
+.mono-tile__img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .mono-tile--lg { width: 60px; height: 60px; border-radius: 16px; font-size: 30px; }
 .mono-tile--md { width: 54px; height: 54px; border-radius: 14px; font-size: 27px; }
 .mono-tile--sm { width: 32px; height: 32px; border-radius: 9px; font-size: 17px; }
