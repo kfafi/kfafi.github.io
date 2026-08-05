@@ -89,6 +89,20 @@ PRODUCTS = [
         {"ar": "كل شيء على جهازك — بلا حساب، بلا خادم.", "en": "Everything on your device — no account, no server."},
         {"ar": "تُجمع في ألبوم واحد، بترتيب التاريخ.", "en": "Gathered into one album, in date order."},
      ], "privacy": True, "icon": True},
+    {"id": "table-manager", "mono": "ج", "tile": "ink", "name": "Table Manager", "ar": "جداول",
+     "tagline": {"ar": "حرِّر جداولك بلا SQL.",
+                 "en": "Edit your tables, no SQL."},
+     "line": {"ar": "حرِّر جداول SQL Server واستكشفها من المتصفّح — دون كتابة SQL. مُستضاف على شبكتك.",
+              "en": "Edit and explore SQL Server tables from the browser — no SQL. Self-hosted on your network."},
+     "intro": {"ar": "جداول تمنح فريقك طريقةً بسيطة كجدول البيانات لتحرير جداول قاعدة SQL Server واستكشافها — دون كتابة SQL. مُستضاف ذاتيًا: يعمل على جهازك ويتّصل بقاعدتك، فلا تغادر بياناتك شبكتك ولا يمرّ شيء عبر كفافي.",
+               "en": "Table Manager gives your team a clean, spreadsheet-like way to edit and explore the tables in a SQL Server database — without writing SQL. It's self-hosted: it runs on your own machine and talks to your own database, so your data never leaves your network and nothing passes through Kefafi."},
+     "platforms": ["SQL Server", "Self-hosted", "Web"],
+     "features": [
+        {"ar": "حرِّر وصفِّ واستورد وصدّر في شبكة تشبه الجداول.", "en": "Edit, filter, import and export in a familiar grid."},
+        {"ar": "تبقى على شبكتك — لا خادم يرى بياناتك.", "en": "Stays on your network — no server sees your data."},
+        {"ar": "أدوار، وصلاحيات لكل جدول ولكل اتصال.", "en": "Roles, and per-table, per-connection permissions."},
+        {"ar": "كل تغيير مُسجَّل، مع نسخ احتياطية.", "en": "Every change logged, with backups."},
+     ], "selfhosted": True},
 ]
 
 PRINCIPLES = [
@@ -120,11 +134,11 @@ T = {
   "heroTitle": "أدواتٌ تفعل ما يكفي فقط.",
   "heroSub": "كفافي استوديو مستقل يصنع أدوات صغيرة دقيقة وهادئة للحياة اليومية. كلٌّ منها يفعل شيئاً واحداً جيداً، ثم يبتعد عن طريقك.",
   "heroCta": "شاهد المنتجات", "heroCta2": "عن الاستوديو",
-  "productsEyebrow": "المنتجات", "productsTitle": "خمس أدوات.", "productsSub": "مبنيّة على نفس المبادئ ونفس الطقم المشترك.",
+  "productsEyebrow": "المنتجات", "productsTitle": "ست أدوات.", "productsSub": "مبنيّة على نفس المبادئ ونفس الطقم المشترك.",
   "viewLabel": "اعرف أكثر",
   "principlesEyebrow": "كيف نبني", "principlesTitle": "مبادئ قليلة، نلتزم بها.",
   "closingEyebrow": "تواصل", "closingTitle": "فكرةٌ، أو سؤال؟", "closingSub": "نحب أن نسمع منك.",
-  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من خمس، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "androidBeta": "نسخة أندرويد التجريبية", "betaTag": "تجريبي", "soonTag": "قريباً",
+  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من ست، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "androidBeta": "نسخة أندرويد التجريبية", "betaTag": "تجريبي", "soonTag": "قريباً", "availableTag": "متاح",
   "aboutEyebrow": "الاستوديو", "aboutTitle": "ما يكفي فقط.",
   "aboutP1": "كفافي استوديو برمجيات مستقل صغير. نصنع أدوات هادئة للحياة اليومية — أداةٌ تفعل شيئاً واحداً جيداً، ثم تبتعد عن طريقك.",
   "aboutP2": "نبني بلغةٍ عربية أولاً، ودون اتصال حيثما أمكن. بياناتك تبقى معك. واجهاتنا دافئة، بلونٍ واحد، بلا ضجيج.",
@@ -141,11 +155,11 @@ T = {
   "heroTitle": "Tools that do just enough.",
   "heroSub": "Kefafi is an independent studio making small, precise, calm tools for everyday personal life. Each one does a single thing well, then gets out of your way.",
   "heroCta": "See the products", "heroCta2": "About the studio",
-  "productsEyebrow": "Products", "productsTitle": "Five tools.", "productsSub": "Built on the same principles and the same shared kit.",
+  "productsEyebrow": "Products", "productsTitle": "Six tools.", "productsSub": "Built on the same principles and the same shared kit.",
   "viewLabel": "Learn more",
   "principlesEyebrow": "How we build", "principlesTitle": "A few principles, kept.",
   "closingEyebrow": "Get in touch", "closingTitle": "An idea, or a question?", "closingSub": "We'd love to hear from you.",
-  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of five tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "androidBeta": "Android beta", "betaTag": "Beta", "soonTag": "Soon",
+  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of six tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "androidBeta": "Android beta", "betaTag": "Beta", "soonTag": "Soon", "availableTag": "Available",
   "aboutEyebrow": "The studio", "aboutTitle": "Just enough.",
   "aboutP1": "Kefafi is a small, independent software studio. We make calm tools for everyday personal life — software that does one thing well, then gets out of your way.",
   "aboutP2": "We build Arabic-first and offline-where-we-can. Your data stays yours. Our interfaces are warm, single-accent, and quiet.",
@@ -220,6 +234,8 @@ def card_stores(p, lang):
             chips.append(f'<span class="store-chip store-chip--beta">{e(T[lang]["betaTag"])}</span>')
     elif p.get("android"):
         chips.append(f'<span class="store-chip store-chip--beta">{e(T[lang]["betaTag"])}</span>')
+    elif p.get("selfhosted"):
+        chips.append(f'<span class="store-chip store-chip--live">{e(T[lang]["availableTag"])}</span>')
     else:
         chips.append(f'<span class="store-chip store-chip--soon">{e(T[lang]["soonTag"])}</span>')
     return '<div class="card__stores">' + "".join(chips) + '</div>'
@@ -491,6 +507,12 @@ def page_product(lang, p):
                      f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>\n'
                      f'          <a class="btn btn--ghost" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
                      f'        </div>{legal_row}')
+    elif p.get("selfhosted"):  # self-hosted, available now, no public store/repo link
+        priv = (f'\n        <p class="cta-secondary"><a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a></p>'
+                if p.get("privacy") else '')
+        cta_block = (f'        <div class="btn-row">\n'
+                     f'          <a class="btn btn--primary" href="{b}/contact/">{e(t["navContact"])}</a>\n'
+                     f'        </div>{priv}')
     else:
         priv = (f'\n        <p class="cta-secondary"><a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a></p>'
                 if p.get("privacy") else '')

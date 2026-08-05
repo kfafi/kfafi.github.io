@@ -408,6 +408,7 @@ html[lang="ar"] .prose h1 { font-family: var(--font-arabic-display); }
 .store-chip svg { width: 12px; height: 12px; flex: 0 0 auto; }
 .store-chip--beta { color: var(--clay-700); background: var(--clay-50); border-color: var(--clay-100); }
 .store-chip--soon { color: var(--ink-400); }
+.store-chip--live { color: var(--text-on-clay); background: var(--clay-500); border-color: var(--clay-500); }
 
 /* ---- Store download badges + secondary CTA links ---- */
 .store-btns { display: flex; gap: 12px; flex-wrap: wrap; }
