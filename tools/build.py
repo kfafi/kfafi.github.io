@@ -75,6 +75,20 @@ PRODUCTS = [
         {"ar": "محدِّث داخل التطبيق.", "en": "In-app updater."},
         {"ar": "واجهة هادئة تناسب جهاز التحكم.", "en": "Calm, remote-friendly UI."},
      ]},
+    {"id": "thikrayat", "mono": "ذ", "tile": "clay", "name": "Thikrayat", "ar": "ذكريات",
+     "tagline": {"ar": "ذكرياتك، تعود إلى جهازك.",
+                 "en": "Your memories, back on your phone."},
+     "line": {"ar": "حوّل نسخة بياناتك من سناب شات إلى صور ومقاطع حقيقية — بتواريخها وأماكنها الأصلية. على جهازك، بلا حساب.",
+              "en": "Turn your Snapchat data export into real photos and videos — with their original dates and places. On your device, no account."},
+     "intro": {"ar": "ذكريات تحوّل نسخة بياناتك من سناب شات إلى صور ومقاطع حقيقية على جهازك — كلٌّ منها بتاريخ التقاطها، ومكانها متى سجّلته نسختك، وتُجمع في ألبوم واحد. كل شيء يجري على هاتفك: بلا حساب، بلا خادم، ولا يُرفع شيء. غير مرتبطة بشركة سناب.",
+               "en": "Thikrayat turns your Snapchat “Download My Data” export into real photos and videos on your device — each restored with the day it was taken, the place where your export recorded it, and gathered into one album. Everything happens on your phone: no account, no server, nothing uploaded. Not affiliated with Snap Inc."},
+     "platforms": ["Flutter", "iOS", "Android"],
+     "features": [
+        {"ar": "صور ومقاطع حقيقية، بتواريخها الأصلية.", "en": "Real photos and videos, with their original dates."},
+        {"ar": "الأماكن تُعاد حيثما سجّلتها نسختك.", "en": "Places written back where your export has them."},
+        {"ar": "كل شيء على جهازك — بلا حساب، بلا خادم.", "en": "Everything on your device — no account, no server."},
+        {"ar": "تُجمع في ألبوم واحد، بترتيب التاريخ.", "en": "Gathered into one album, in date order."},
+     ], "privacy": True},
 ]
 
 PRINCIPLES = [
@@ -106,11 +120,11 @@ T = {
   "heroTitle": "أدواتٌ تفعل ما يكفي فقط.",
   "heroSub": "كفافي استوديو مستقل يصنع أدوات صغيرة دقيقة وهادئة للحياة اليومية. كلٌّ منها يفعل شيئاً واحداً جيداً، ثم يبتعد عن طريقك.",
   "heroCta": "شاهد المنتجات", "heroCta2": "عن الاستوديو",
-  "productsEyebrow": "المنتجات", "productsTitle": "أربع أدوات.", "productsSub": "مبنيّة على نفس المبادئ ونفس الطقم المشترك.",
+  "productsEyebrow": "المنتجات", "productsTitle": "خمس أدوات.", "productsSub": "مبنيّة على نفس المبادئ ونفس الطقم المشترك.",
   "viewLabel": "اعرف أكثر",
   "principlesEyebrow": "كيف نبني", "principlesTitle": "مبادئ قليلة، نلتزم بها.",
   "closingEyebrow": "تواصل", "closingTitle": "فكرةٌ، أو سؤال؟", "closingSub": "نحب أن نسمع منك.",
-  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من أربع، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "androidBeta": "نسخة أندرويد التجريبية", "betaTag": "تجريبي", "soonTag": "قريباً",
+  "backLabel": "كل المنتجات", "featuresTitle": "ماذا يفعل", "partOf": "جزء من كفافي", "partOfSub": "أداةٌ واحدة من خمس، مبنيّة بنفس الهدوء.", "ctaGithub": "على GitHub", "privacyLabel": "سياسة الخصوصية", "termsLabel": "شروط الاستخدام", "supportLabel": "الدعم", "tryBeta": "جرّب النسخة التجريبية", "getApp": "احصل على التطبيق", "androidBeta": "نسخة أندرويد التجريبية", "betaTag": "تجريبي", "soonTag": "قريباً",
   "aboutEyebrow": "الاستوديو", "aboutTitle": "ما يكفي فقط.",
   "aboutP1": "كفافي استوديو برمجيات مستقل صغير. نصنع أدوات هادئة للحياة اليومية — أداةٌ تفعل شيئاً واحداً جيداً، ثم تبتعد عن طريقك.",
   "aboutP2": "نبني بلغةٍ عربية أولاً، ودون اتصال حيثما أمكن. بياناتك تبقى معك. واجهاتنا دافئة، بلونٍ واحد، بلا ضجيج.",
@@ -127,11 +141,11 @@ T = {
   "heroTitle": "Tools that do just enough.",
   "heroSub": "Kefafi is an independent studio making small, precise, calm tools for everyday personal life. Each one does a single thing well, then gets out of your way.",
   "heroCta": "See the products", "heroCta2": "About the studio",
-  "productsEyebrow": "Products", "productsTitle": "Four tools.", "productsSub": "Built on the same principles and the same shared kit.",
+  "productsEyebrow": "Products", "productsTitle": "Five tools.", "productsSub": "Built on the same principles and the same shared kit.",
   "viewLabel": "Learn more",
   "principlesEyebrow": "How we build", "principlesTitle": "A few principles, kept.",
   "closingEyebrow": "Get in touch", "closingTitle": "An idea, or a question?", "closingSub": "We'd love to hear from you.",
-  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of four tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "androidBeta": "Android beta", "betaTag": "Beta", "soonTag": "Soon",
+  "backLabel": "All products", "featuresTitle": "What it does", "partOf": "Part of Kefafi", "partOfSub": "One of five tools, built with the same calm.", "ctaGithub": "On GitHub", "privacyLabel": "Privacy policy", "termsLabel": "Terms of Service", "supportLabel": "Support", "tryBeta": "Try the beta", "getApp": "Get the app", "androidBeta": "Android beta", "betaTag": "Beta", "soonTag": "Soon",
   "aboutEyebrow": "The studio", "aboutTitle": "Just enough.",
   "aboutP1": "Kefafi is a small, independent software studio. We make calm tools for everyday personal life — software that does one thing well, then gets out of your way.",
   "aboutP2": "We build Arabic-first and offline-where-we-can. Your data stays yours. Our interfaces are warm, single-accent, and quiet.",
@@ -326,6 +340,7 @@ def footer(lang):
               <a href="{b}/nasab/support/">Nasab {e(t['supportLabel'])}</a>
               <a href="/daftar/privacy/">Daftar {e(t['privacyLabel'])}</a>
               <a href="/sayla/privacy/">Sayla {e(t['privacyLabel'])}</a>
+              <a href="/thikrayat/privacy/">Thikrayat {e(t['privacyLabel'])}</a>
             </div>
           </div>
         </div>
@@ -470,10 +485,12 @@ def page_product(lang, p):
                      f'          <a class="btn btn--ghost" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
                      f'        </div>{legal_row}')
     else:
+        priv = (f'\n        <p class="cta-secondary"><a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a></p>'
+                if p.get("privacy") else '')
         cta_block = (f'        <div class="btn-row">\n'
                      f'          <a class="btn btn--primary" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
                      f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>\n'
-                     f'        </div>')
+                     f'        </div>{priv}')
     title = f"{p['name']} — {p['tagline'][lang]}"
     desc = p["line"][lang]
     return head(lang, title, desc, canonical, alt_url, extra=f"/{pid}/favicon.svg") + header(lang, None, alt_url) + f"""  <main class="wrap">
@@ -1178,10 +1195,10 @@ def page_invite(lang):
 """ + footer(lang)
 
 # ---------------------------------------------------------------- favicons
-def favicon(mono, tile):
+def favicon(mono, tile, label):
     bg = "#1C1815" if tile == "ink" else "#C0502A"
     fg = "#F5F1E8" if tile == "ink" else "#F8F4EC"
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="{label}">
   <rect width="64" height="64" rx="16" fill="{bg}"/>
   <text x="32" y="34" text-anchor="middle" dominant-baseline="central"
         font-family="'IBM Plex Sans Arabic','Reem Kufi','Segoe UI',sans-serif"
@@ -1215,6 +1232,7 @@ def sitemap():
         add(f"{DOMAIN}/en/nasab/{slug}/", "yearly", "0.4")
     add(DOMAIN + "/daftar/privacy/", "yearly", "0.4")
     add(DOMAIN + "/sayla/privacy/", "yearly", "0.4")
+    add(DOMAIN + "/thikrayat/privacy/", "yearly", "0.4")
     body = "\n".join(urls)
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1239,8 +1257,9 @@ for lang in ("ar", "en"):
     # Nasab invite fallback (noindex; served for /nasab/invite/* via a Cloudflare rewrite).
     write(pref + "nasab/invite/index.html", page_invite(lang))
 
-write("nasab/favicon.svg", favicon("ن", "ink"))
-write("lumen/favicon.svg", favicon("ل", "ink"))
-write("sayla/favicon.svg", favicon("س", "clay"))
+# One favicon per product, generated from its own tile + mono glyph, so a new
+# product entry automatically gets its icon (no hand-maintained list to forget).
+for _p in PRODUCTS:
+    write(_p["id"] + "/favicon.svg", favicon(_p["mono"], _p["tile"], _p["name"]))
 write("sitemap.xml", sitemap())
 print("done")
