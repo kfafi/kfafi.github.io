@@ -133,6 +133,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://kefafi.dev/table-manager/</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kefafi.dev/en/table-manager/</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://kefafi.dev/nasab/privacy/</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>yearly</changefreq>
