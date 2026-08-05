@@ -88,7 +88,7 @@ PRODUCTS = [
         {"ar": "الأماكن تُعاد حيثما سجّلتها نسختك.", "en": "Places written back where your export has them."},
         {"ar": "كل شيء على جهازك — بلا حساب، بلا خادم.", "en": "Everything on your device — no account, no server."},
         {"ar": "تُجمع في ألبوم واحد، بترتيب التاريخ.", "en": "Gathered into one album, in date order."},
-     ]},
+     ], "privacy": True},
 ]
 
 PRINCIPLES = [
@@ -340,6 +340,7 @@ def footer(lang):
               <a href="{b}/nasab/support/">Nasab {e(t['supportLabel'])}</a>
               <a href="/daftar/privacy/">Daftar {e(t['privacyLabel'])}</a>
               <a href="/sayla/privacy/">Sayla {e(t['privacyLabel'])}</a>
+              <a href="/thikrayat/privacy/">Thikrayat {e(t['privacyLabel'])}</a>
             </div>
           </div>
         </div>
@@ -484,10 +485,12 @@ def page_product(lang, p):
                      f'          <a class="btn btn--ghost" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
                      f'        </div>{legal_row}')
     else:
+        priv = (f'\n        <p class="cta-secondary"><a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a></p>'
+                if p.get("privacy") else '')
         cta_block = (f'        <div class="btn-row">\n'
                      f'          <a class="btn btn--primary" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
                      f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>\n'
-                     f'        </div>')
+                     f'        </div>{priv}')
     title = f"{p['name']} — {p['tagline'][lang]}"
     desc = p["line"][lang]
     return head(lang, title, desc, canonical, alt_url, extra=f"/{pid}/favicon.svg") + header(lang, None, alt_url) + f"""  <main class="wrap">
@@ -1192,10 +1195,10 @@ def page_invite(lang):
 """ + footer(lang)
 
 # ---------------------------------------------------------------- favicons
-def favicon(mono, tile):
+def favicon(mono, tile, label):
     bg = "#1C1815" if tile == "ink" else "#C0502A"
     fg = "#F5F1E8" if tile == "ink" else "#F8F4EC"
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="{label}">
   <rect width="64" height="64" rx="16" fill="{bg}"/>
   <text x="32" y="34" text-anchor="middle" dominant-baseline="central"
         font-family="'IBM Plex Sans Arabic','Reem Kufi','Segoe UI',sans-serif"
@@ -1229,6 +1232,7 @@ def sitemap():
         add(f"{DOMAIN}/en/nasab/{slug}/", "yearly", "0.4")
     add(DOMAIN + "/daftar/privacy/", "yearly", "0.4")
     add(DOMAIN + "/sayla/privacy/", "yearly", "0.4")
+    add(DOMAIN + "/thikrayat/privacy/", "yearly", "0.4")
     body = "\n".join(urls)
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1253,9 +1257,9 @@ for lang in ("ar", "en"):
     # Nasab invite fallback (noindex; served for /nasab/invite/* via a Cloudflare rewrite).
     write(pref + "nasab/invite/index.html", page_invite(lang))
 
-write("nasab/favicon.svg", favicon("ن", "ink"))
-write("lumen/favicon.svg", favicon("ل", "ink"))
-write("sayla/favicon.svg", favicon("س", "clay"))
-write("thikrayat/favicon.svg", favicon("ذ", "clay"))
+# One favicon per product, generated from its own tile + mono glyph, so a new
+# product entry automatically gets its icon (no hand-maintained list to forget).
+for _p in PRODUCTS:
+    write(_p["id"] + "/favicon.svg", favicon(_p["mono"], _p["tile"], _p["name"]))
 write("sitemap.xml", sitemap())
 print("done")
