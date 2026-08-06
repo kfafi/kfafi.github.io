@@ -1249,18 +1249,24 @@ def favicon(mono, tile, label):
 # gradient. The square variant (no corner radius) feeds the CSS tiles, which round
 # it per size; the rounded variant is the standalone browser-tab favicon.
 PRODUCT_ICON_ART = {
+    # Matches the Google Play store icon: two stacked photo cards with the
+    # classic "photo" glyph inside the front card — an ochre sun + solid tan
+    # mountains (two peaks) — clipped to the card's rounded corners.
     "thikrayat": (
-        '<rect x="46" y="52" width="78" height="72" rx="11" fill="#E7D8C2" transform="rotate(-8 85 88)"/>'
-        '<rect x="52" y="58" width="78" height="72" rx="11" fill="#FBF5EC"/>'
-        '<path d="M62 108 q29 -16 58 0" stroke="#C9A98A" stroke-width="4" fill="none" stroke-linecap="round"/>'
-        '<circle cx="104" cy="82" r="8.5" fill="#E0A756"/>'
+        '<rect x="44" y="48" width="76" height="74" rx="12" fill="#E7D9C1" transform="rotate(-8 82 85)"/>'
+        '<clipPath id="tk"><rect x="52" y="54" width="76" height="74" rx="12"/></clipPath>'
+        '<rect x="52" y="54" width="76" height="74" rx="12" fill="#F6F0E3"/>'
+        '<g clip-path="url(#tk)">'
+        '<circle cx="72" cy="79" r="8.5" fill="#E4A64E"/>'
+        '<path d="M52 128 L76 99 L90 112 L107 89 L128 128 Z" fill="#C6A069"/>'
+        '</g>'
     ),
 }
 def product_icon_svg(pid, name, rounded):
     rx = ' rx="37"' if rounded else ''
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 168" role="img" aria-label="{name}">\n'
             f'  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">'
-            f'<stop offset="0" stop-color="#A9663F"/><stop offset="1" stop-color="#7A5C3E"/></linearGradient></defs>\n'
+            f'<stop offset="0" stop-color="#B85231"/><stop offset="1" stop-color="#8C3A1D"/></linearGradient></defs>\n'
             f'  <rect width="168" height="168"{rx} fill="url(#g)"/>\n'
             f'  {PRODUCT_ICON_ART[pid]}\n</svg>\n')
 
