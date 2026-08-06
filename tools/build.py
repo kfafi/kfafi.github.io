@@ -88,7 +88,7 @@ PRODUCTS = [
         {"ar": "الأماكن تُعاد حيثما سجّلتها نسختك.", "en": "Places written back where your export has them."},
         {"ar": "كل شيء على جهازك — بلا حساب، بلا خادم.", "en": "Everything on your device — no account, no server."},
         {"ar": "تُجمع في ألبوم واحد، بترتيب التاريخ.", "en": "Gathered into one album, in date order."},
-     ], "privacy": True, "icon": True},
+     ], "privacy": True, "icon": True, "android": "dev.kefafi.thakira"},
     {"id": "table-manager", "mono": "ج", "tile": "ink", "name": "Jadawil", "ar": "جداول",
      "tagline": {"ar": "حرِّر جداولك بلا SQL.",
                  "en": "Edit your tables, no SQL."},
@@ -508,11 +508,13 @@ def page_product(lang, p):
                      f'        {store_buttons(p, lang)}\n'
                      f'        {secondary}{legal_row}')
     elif p.get("android"):  # closed beta -> "Join the beta" primary
+        priv = (f'\n        <p class="cta-secondary"><a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a></p>'
+                if (p.get("privacy") and not legal_row) else '')
         cta_block = (f'        <div class="btn-row">\n'
                      f'          <a class="btn btn--primary" href="{b}/{pid}/test/">{e(t["tryBeta"])}</a>\n'
                      f'          <a class="btn btn--ghost" href="{b}/contact/">{e(t["navContact"])}</a>\n'
                      f'          <a class="btn btn--ghost" href="{GITHUB}" target="_blank" rel="noopener">{e(t["ctaGithub"])}</a>\n'
-                     f'        </div>{legal_row}')
+                     f'        </div>{legal_row}{priv}')
     elif p.get("selfhosted"):  # self-hosted, available now, no public store/repo link
         priv = (f'\n        <p class="cta-secondary"><a href="/{pid}/privacy/">{e(t["privacyLabel"])}</a></p>'
                 if p.get("privacy") else '')
