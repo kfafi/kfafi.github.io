@@ -308,7 +308,7 @@ def head(lang, title, desc, canonical, alt_url, extra="", noindex=False):
   <meta name="twitter:description" content="{e(desc)}">
   {THEME_HEAD}
   <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" href="{extra or '/favicon.svg'}" type="image/svg+xml">
+  <link rel="icon" href="{(extra or '/favicon.svg')}?v=2" type="image/svg+xml">
 </head>
 <body>"""
 
